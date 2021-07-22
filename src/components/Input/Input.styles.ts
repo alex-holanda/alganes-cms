@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 export const Wrapper = styled.label`
   display: flex;
-  gap: 16px;
+  justify-content: space-between;
   flex-direction: column;
+  height: 56px;
 
   span {
     color: #274060;
