@@ -8,7 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export function Input({ label, ...props }: InputProps) {
   return (
     <Wrapper>
-      {label && <span>{label}</span>}
+      {label && <span>{label}:</span>}
       <input type="text" {...props} />
     </Wrapper>
   );
