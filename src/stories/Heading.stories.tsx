@@ -1,9 +1,9 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Heading } from "../components/Typography";
+import { Heading } from "../components/Typography/Heading";
 
 export default {
-  title: "Example/Heading",
+  title: "Typography/Heading",
   component: Heading,
   // argTypes: {
   //   backgroundColor: { control: "color" },
