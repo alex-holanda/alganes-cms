@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { Wrapper } from "./Button.styles";
+import { Wrapper } from "./styles";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "primary" | "danger" | "text";

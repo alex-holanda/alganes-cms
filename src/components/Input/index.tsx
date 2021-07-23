@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from "react";
-import { Wrapper } from "./Input.styles";
+import { Wrapper } from "./styles";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
