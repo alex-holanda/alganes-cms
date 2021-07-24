@@ -1,72 +1,13 @@
-import { useMemo } from "react";
-
-import { useTable, Column } from "react-table";
-
-import Icon from "@mdi/react";
-import { mdiOpenInNew } from "@mdi/js";
+import { TableInstance } from "react-table";
 
 import * as T from "./styles";
 
-type Data = {
-  preview: React.ReactNode;
-  col1: string;
-  col2: string;
-  actions: string;
-};
+interface TableProps<T extends Object> {
+  instance: TableInstance<T>;
+}
 
-interface TableProps {}
-
-export function Table(props: TableProps) {
-  const data = useMemo<Data[]>(
-    () => [
-      {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "Hello",
-        col2: "World",
-        actions: "Ações",
-      },
-      {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "react-table",
-        col2: "rocks",
-        actions: "Ações",
-      },
-      {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "whatever",
-        col2: "you want",
-        actions: "Ações",
-      },
-    ],
-    []
-  );
-
-  const columns = useMemo<Column<Data>[]>(
-    () => [
-      {
-        Header: "",
-        accessor: "preview",
-      },
-      {
-        Header: "Column 1",
-        accessor: "col1",
-        width: 320,
-        Cell: (row) => <div style={{ textAlign: "right" }}>{row.value}</div>,
-      },
-      {
-        Header: "Column 2",
-        accessor: "col2",
-        Cell: (row) => <div style={{ textAlign: "center" }}>{row.value}</div>,
-      },
-      {
-        Header: "Ações",
-        accessor: "actions",
-      },
-    ],
-    []
-  );
-
-  const tableInstance = useTable<Data>({ data, columns });
+export function Table<T extends Object>({ instance }: TableProps<T>) {
+  // const tableInstance = useTable<>({ data, columns });
 
   const {
     getTableProps,
@@ -74,7 +15,7 @@ export function Table(props: TableProps) {
     prepareRow,
     headerGroups,
     rows,
-  } = tableInstance;
+  } = instance;
 
   return (
     <T.Wrapper {...getTableProps()} cellPadding="0" cellSpacing="0">
