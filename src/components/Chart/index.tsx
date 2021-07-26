@@ -1,4 +1,7 @@
 import { Line } from "react-chartjs-2";
+import { Heading } from "../Typography/Heading";
+
+import { Wrapper, Title } from "./styles";
 
 const data: Chart.ChartData = {
   labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
@@ -25,7 +28,7 @@ const data: Chart.ChartData = {
 };
 
 const options: Chart.ChartOptions = {
-  maintainAspectRatio: false,
+  maintainAspectRatio: true,
   elements: {
     line: {
       tension: 0,
@@ -63,8 +66,20 @@ interface ChartProps {}
 
 export function Chart({}: ChartProps) {
   return (
-    <div>
-      <Line data={data} options={options} height={250} type="line" />
-    </div>
+    <Wrapper>
+      <Title>
+        <Heading level={3}>
+          {"Média de performance nos últimos 12 meses"}
+        </Heading>
+      </Title>
+
+      <Line
+        data={data}
+        options={options}
+        height={139}
+        width={600}
+        type="line"
+      />
+    </Wrapper>
   );
 }
