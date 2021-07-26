@@ -4,6 +4,7 @@ import { transparentize } from "polished";
 export const Wrapper = styled.table`
   background-color: ${transparentize(0.95, "#274060")};
   color: #274060;
+  width: 100%;
 `;
 
 export const Heading = styled.thead`
@@ -27,4 +28,8 @@ export const BodyCell = styled.td`
   font-size: 12px;
   font-weight: 500;
   padding: 0 8px;
+`;
+
+export const WithoutData = styled.div`
+  background-color: ${transparentize(0.95, "#274060")};
 `;

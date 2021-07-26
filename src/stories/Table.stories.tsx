@@ -145,7 +145,7 @@ export function Default() {
       {
         id: Math.random().toString(),
         Header: () => <div style={{ textAlign: "right" }}>Ações</div>,
-        Cell: () => <div>todo: actions</div>,
+        Cell: () => <div style={{ textAlign: "right" }}>todo: actions</div>,
       },
     ],
     []
@@ -155,7 +155,7 @@ export function Default() {
   return <Table<Post> instance={instance} />;
 }
 
-export function NoData() {
+export function WithoutData() {
   const data = useMemo<Post[]>(() => [], []);
 
   const columns = useMemo<Column<Post>[]>(
@@ -224,7 +224,7 @@ export function NoData() {
       {
         id: Math.random().toString(),
         Header: () => <div style={{ textAlign: "right" }}>Ações</div>,
-        Cell: () => <div>todo: actions</div>,
+        Cell: () => <div style={{ textAlign: "right" }}>todo: actions</div>,
       },
     ],
     []

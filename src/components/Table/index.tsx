@@ -1,4 +1,5 @@
 import { TableInstance } from "react-table";
+import { NoData } from "../NoData";
 
 import * as T from "./styles";
 
@@ -18,36 +19,44 @@ export function Table<T extends Object>({ instance }: TableProps<T>) {
   } = instance;
 
   return (
-    <T.Wrapper {...getTableProps()} cellPadding="0" cellSpacing="0">
-      <T.Heading>
-        {headerGroups.map((headerGroup) => (
-          <T.HeadingRow {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <T.HeadingCell {...column.getHeaderProps()}>
-                {column.render("Header")}
-              </T.HeadingCell>
-            ))}
-          </T.HeadingRow>
-        ))}
-      </T.Heading>
+    <>
+      <T.Wrapper {...getTableProps()} cellPadding="0" cellSpacing="0">
+        <T.Heading>
+          {headerGroups.map((headerGroup) => (
+            <T.HeadingRow {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <T.HeadingCell {...column.getHeaderProps()}>
+                  {column.render("Header")}
+                </T.HeadingCell>
+              ))}
+            </T.HeadingRow>
+          ))}
+        </T.Heading>
 
-      <T.Body {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
+        <T.Body {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
 
-          return (
-            <T.BodyRow {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <T.BodyCell {...cell.getCellProps()}>
-                    {cell.render("Cell")}
-                  </T.BodyCell>
-                );
-              })}
-            </T.BodyRow>
-          );
-        })}
-      </T.Body>
-    </T.Wrapper>
+            return (
+              <T.BodyRow {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <T.BodyCell {...cell.getCellProps()}>
+                      {cell.render("Cell")}
+                    </T.BodyCell>
+                  );
+                })}
+              </T.BodyRow>
+            );
+          })}
+        </T.Body>
+      </T.Wrapper>
+
+      {!rows.length && (
+        <T.WithoutData>
+          <NoData height={360} />
+        </T.WithoutData>
+      )}
+    </>
   );
 }
