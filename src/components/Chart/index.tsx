@@ -24,6 +24,11 @@ const data: Chart.ChartData = {
 
 const options: Chart.ChartOptions = {
   maintainAspectRatio: false,
+  elements: {
+    line: {
+      tension: 0,
+    },
+  },
   legend: {
     display: true,
     position: "bottom",
@@ -58,7 +63,7 @@ interface ChartProps {}
 export function Chart({}: ChartProps) {
   return (
     <div>
-      <Line data={data} options={options} height={100} type="line" />
+      <Line data={data} options={options} height={250} type="line" />
     </div>
   );
 }
