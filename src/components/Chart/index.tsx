@@ -1,6 +1,6 @@
 import { Line } from "react-chartjs-2";
 
-const data = {
+const data: Chart.ChartData = {
   labels: ["1", "2", "3", "4", "5", "6"],
   datasets: [
     {
@@ -22,7 +22,7 @@ const data = {
   ],
 };
 
-const options = {
+const options: Chart.ChartOptions = {
   maintainAspectRatio: false,
   scales: {
     yAxes: [
@@ -38,7 +38,7 @@ const options = {
         position: "right",
         id: "y-axis-2",
         gridLines: {
-          drawOnArea: false,
+          display: false,
         },
       },
     ],
@@ -50,7 +50,7 @@ interface ChartProps {}
 export function Chart({}: ChartProps) {
   return (
     <div>
-      <Line data={data} options={options} height={100} />
+      <Line data={data} options={options} height={100} type="line" />
     </div>
   );
 }
