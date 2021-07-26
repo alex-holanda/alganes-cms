@@ -16,71 +16,142 @@ export default {
   // },
 } as ComponentMeta<typeof Table>;
 
-type Data = {
-  preview: React.ReactNode;
-  col1: string;
-  col2: string;
-  actions: string;
+type Post = {
+  id: number;
+  title: string;
+  views: number;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  conversions: {
+    thousands: number;
+    percentage: number;
+  };
 };
 
 export function Default() {
-  const data = useMemo<Data[]>(
+  const data = useMemo<Post[]>(
     () => [
       {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "Hello",
-        col2: "World",
-        actions: "Ações",
+        author: {
+          name: "Daniel Bonifacio",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNf0vAZLggJoZxGKpfOa3EBClHkwQmmvv9Lg&usqp=CAU",
+        },
+        id: 1,
+        conversions: {
+          percentage: 64.35,
+          thousands: 607,
+        },
+        title: "Como dobrei meu salário aprendendo somente React",
+        views: 985415,
       },
       {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "Batata",
-        col2: "Banana",
-        actions: "Ações",
+        author: {
+          name: "Daniel Bonifacio",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNf0vAZLggJoZxGKpfOa3EBClHkwQmmvv9Lg&usqp=CAU",
+        },
+        id: 2,
+        conversions: {
+          percentage: 64.35,
+          thousands: 607,
+        },
+        title: "React.js vs. React Native: a REAL diferença entre os dois",
+        views: 985415,
       },
       {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "react-table",
-        col2: "rocks",
-        actions: "Ações",
-      },
-      {
-        preview: <Icon path={mdiOpenInNew} size="14px" color="#09f" />,
-        col1: "whatever",
-        col2: "you want",
-        actions: "Ações",
+        author: {
+          name: "Daniel Bonifacio",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNf0vAZLggJoZxGKpfOa3EBClHkwQmmvv9Lg&usqp=CAU",
+        },
+        id: 3,
+        conversions: {
+          percentage: 95.35,
+          thousands: 845,
+        },
+        title: "Como dobrei meu salário aprendendo somente React",
+        views: 985415,
       },
     ],
     []
   );
 
-  const columns = useMemo<Column<Data>[]>(
+  const columns = useMemo<Column<Post>[]>(
     () => [
       {
         Header: "",
-        accessor: "preview",
+        accessor: "id",
+        Cell: () => <Icon path={mdiOpenInNew} size={"14px"} color={"#09f"} />,
       },
       {
-        Header: "Column 1",
-        accessor: "col1",
+        Header: "Artigo",
+        accessor: "title",
         width: 320,
-        Cell: (row) => <div style={{ textAlign: "right" }}>{row.value}</div>,
+        Cell: (props) => (
+          <div
+            style={{
+              textAlign: "left",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <img
+              width={24}
+              height={24}
+              src={props.row.original.author.avatar}
+              alt={props.row.original.author.name}
+            />
+            {props.value}
+          </div>
+        ),
       },
       {
-        Header: "Column 2",
-        accessor: "col2",
-        Cell: (row) => <div style={{ textAlign: "center" }}>{row.value}</div>,
+        Header: "Views",
+        accessor: "views",
+        Cell: (props) => (
+          <div
+            style={{
+              textAlign: "right",
+              fontFamily: "'Roboto mono', monospace",
+              fontWeight: 700,
+            }}
+          >
+            {props.value.toLocaleString("pt-br")}
+          </div>
+        ),
+      },
+      {
+        Header: "Conversões",
+        accessor: "conversions",
+        Cell: (props) => (
+          <div
+            style={{
+              textAlign: "right",
+              display: "flex",
+              gap: "8px",
+              fontFamily: "'Roboto mono', monospace",
+              fontWeight: 700,
+            }}
+          >
+            <span>{props.value.thousands}K</span>
+            <span style={{ color: "#09f" }}>({props.value.percentage}%)</span>
+          </div>
+        ),
       },
       {
         Header: "Ações",
-        accessor: "actions",
+        Cell: () => <div>todo: actions</div>,
       },
     ],
     []
   );
 
-  const instance = useTable<Data>({ data, columns });
-  return <Table<Data> instance={instance} />;
+  const instance = useTable<Post>({ data, columns });
+  return <Table<Post> instance={instance} />;
 }
 
 export function NoData() {
