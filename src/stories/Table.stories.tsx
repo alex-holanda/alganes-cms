@@ -166,7 +166,7 @@ export function NoData() {
         Cell: () => <Icon path={mdiOpenInNew} size={"14px"} color={"#09f"} />,
       },
       {
-        Header: "Artigo",
+        Header: () => <div style={{ textAlign: "left" }}>Artigo</div>,
         accessor: "title",
         width: 320,
         Cell: (props) => (
@@ -189,7 +189,7 @@ export function NoData() {
         ),
       },
       {
-        Header: "Views",
+        Header: () => <div style={{ textAlign: "right" }}>Views</div>,
         accessor: "views",
         Cell: (props) => (
           <div
@@ -204,7 +204,7 @@ export function NoData() {
         ),
       },
       {
-        Header: "Conversões",
+        Header: () => <div style={{ textAlign: "left" }}>Conversões</div>,
         accessor: "conversions",
         Cell: (props) => (
           <div
@@ -222,7 +222,8 @@ export function NoData() {
         ),
       },
       {
-        Header: "Ações",
+        id: Math.random().toString(),
+        Header: () => <div style={{ textAlign: "right" }}>Ações</div>,
         Cell: () => <div>todo: actions</div>,
       },
     ],
