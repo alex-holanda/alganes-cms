@@ -23,6 +23,7 @@ const data = {
 };
 
 const options = {
+  maintainAspectRatio: false,
   scales: {
     yAxes: [
       {
@@ -49,7 +50,7 @@ interface ChartProps {}
 export function Chart({}: ChartProps) {
   return (
     <div>
-      <Line data={data} options={options} />
+      <Line data={data} options={options} height={100} />
     </div>
   );
 }
