@@ -87,6 +87,85 @@ export function Default() {
         Cell: () => <Icon path={mdiOpenInNew} size={"14px"} color={"#09f"} />,
       },
       {
+        Header: () => <div style={{ textAlign: "left" }}>Artigo</div>,
+        accessor: "title",
+        width: 320,
+        Cell: (props) => (
+          <div
+            style={{
+              textAlign: "left",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <img
+              width={24}
+              height={24}
+              src={props.row.original.author.avatar}
+              alt={props.row.original.author.name}
+            />
+            {props.value}
+          </div>
+        ),
+      },
+      {
+        Header: () => <div style={{ textAlign: "right" }}>Views</div>,
+        accessor: "views",
+        Cell: (props) => (
+          <div
+            style={{
+              textAlign: "right",
+              fontFamily: "'Roboto mono', monospace",
+              fontWeight: 700,
+            }}
+          >
+            {props.value.toLocaleString("pt-br")}
+          </div>
+        ),
+      },
+      {
+        Header: () => <div style={{ textAlign: "left" }}>Conversões</div>,
+        accessor: "conversions",
+        Cell: (props) => (
+          <div
+            style={{
+              textAlign: "right",
+              display: "flex",
+              gap: "8px",
+              fontFamily: "'Roboto mono', monospace",
+              fontWeight: 700,
+            }}
+          >
+            <span>{props.value.thousands}K</span>
+            <span style={{ color: "#09f" }}>({props.value.percentage}%)</span>
+          </div>
+        ),
+      },
+      {
+        id: Math.random().toString(),
+        Header: () => <div style={{ textAlign: "right" }}>Ações</div>,
+        Cell: () => <div>todo: actions</div>,
+      },
+    ],
+    []
+  );
+
+  const instance = useTable<Post>({ data, columns });
+  return <Table<Post> instance={instance} />;
+}
+
+export function NoData() {
+  const data = useMemo<Post[]>(() => [], []);
+
+  const columns = useMemo<Column<Post>[]>(
+    () => [
+      {
+        Header: "",
+        accessor: "id",
+        Cell: () => <Icon path={mdiOpenInNew} size={"14px"} color={"#09f"} />,
+      },
+      {
         Header: "Artigo",
         accessor: "title",
         width: 320,
@@ -152,43 +231,4 @@ export function Default() {
 
   const instance = useTable<Post>({ data, columns });
   return <Table<Post> instance={instance} />;
-}
-
-export function NoData() {
-  const data = useMemo<Data[]>(() => [], []);
-
-  type Data = {
-    preview: React.ReactNode;
-    col1: string;
-    col2: string;
-    actions: string;
-  };
-
-  const columns = useMemo<Column<Data>[]>(
-    () => [
-      {
-        Header: "",
-        accessor: "preview",
-      },
-      {
-        Header: "Column 1",
-        accessor: "col1",
-        width: 320,
-        Cell: (row) => <div style={{ textAlign: "right" }}>{row.value}</div>,
-      },
-      {
-        Header: "Column 2",
-        accessor: "col2",
-        Cell: (row) => <div style={{ textAlign: "center" }}>{row.value}</div>,
-      },
-      {
-        Header: "Ações",
-        accessor: "actions",
-      },
-    ],
-    []
-  );
-
-  const instance = useTable<Data>({ data, columns });
-  return <Table<Data> instance={instance} />;
 }
