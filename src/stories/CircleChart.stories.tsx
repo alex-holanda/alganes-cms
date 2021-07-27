@@ -13,6 +13,13 @@ export default {
         max: 100,
       },
     },
+    strokeWidth: {
+      control: {
+        type: "range",
+        min: 5,
+        max: 20,
+      },
+    },
   },
 } as ComponentMeta<typeof CircleChart>;
 
@@ -22,6 +29,18 @@ const Template: ComponentStory<typeof CircleChart> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  progress: 4,
+  progress: 62,
   size: 150,
+  caption: "web",
+  theme: "default",
+  strokeWidth: 8,
+};
+
+export const Primary = Template.bind({});
+Primary.args = {
+  progress: 81,
+  size: 150,
+  caption: "web",
+  theme: "primary",
+  strokeWidth: 8,
 };

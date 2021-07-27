@@ -25,7 +25,11 @@ export const Circle = styled.circle`
 
 export const CircleBG = styled.circle.attrs({ fill: "#fff" })``;
 
-export const Percentage = styled.span`
+interface PercentageProps {
+  theme?: "default" | "primary";
+}
+
+export const Percentage = styled.span<PercentageProps>`
   position: absolute;
   top: 0;
   left: 0;
@@ -37,7 +41,7 @@ export const Percentage = styled.span`
   justify-content: center;
   align-items: center;
 
-  color: #274060;
+  color: ${(props) => (props.theme === "primary" ? "#09f" : "#274060")};
 
   font-weight: 900;
   font-size: 1.2em;

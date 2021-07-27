@@ -29,9 +29,23 @@ export function CircleChart(props: CircleChartProps) {
 
   return (
     <CC.Wrapper>
-      <CC.SvgWrapper>
-        <CC.Svg></CC.Svg>
+      <CC.SvgWrapper style={{ width: props.size, height: props.size }}>
+        <CC.Svg width={props.size} height={props.size}>
+          <CC.CircleBG cy={CENTER} cx={CENTER} r={RADIOS} />
+          <CC.Circle
+            fill="none"
+            cy={CENTER}
+            cx={CENTER}
+            r={RADIOS}
+            stroke={STROKE_COLOR}
+            strokeWidth={STROKE_WITH}
+            strokeDasharray={CIRCUMFERENCE}
+            strokeDashoffset={offset}
+          />
+        </CC.Svg>
+        <CC.Percentage theme={props.theme}>{props.progress}%</CC.Percentage>
       </CC.SvgWrapper>
+      {props.caption && <CC.Caption>{props.caption}</CC.Caption>}
     </CC.Wrapper>
   );
 }
