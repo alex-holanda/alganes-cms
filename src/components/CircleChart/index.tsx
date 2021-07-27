@@ -27,5 +27,11 @@ export function CircleChart(props: CircleChartProps) {
     setOffset(progressOffset);
   }, [setOffset, CIRCUMFERENCE, props.progress, offset]);
 
-  return <CC.Wrapper>todo: CircleChart</CC.Wrapper>;
+  return (
+    <CC.Wrapper>
+      <CC.SvgWrapper>
+        <CC.Svg></CC.Svg>
+      </CC.SvgWrapper>
+    </CC.Wrapper>
+  );
 }
