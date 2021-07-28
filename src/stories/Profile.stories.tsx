@@ -15,4 +15,7 @@ const Template: ComponentStory<typeof Profile> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  name: "Felipe Hasch",
+  description: "criador de conteúdo há 3 anos",
+};
