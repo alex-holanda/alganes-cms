@@ -14,7 +14,7 @@ const KeyCodes = {
   enter: 13,
   tab: 9,
   semicolon: 191,
-  space: 32,
+  // space: 32,
 };
 
 export function TagInput(props: TagInputProps) {
@@ -32,7 +32,7 @@ export function TagInput(props: TagInputProps) {
           KeyCodes.enter,
           KeyCodes.tab,
           KeyCodes.semicolon,
-          KeyCodes.space,
+          // KeyCodes.space,
         ]}
       />
     </TI.Wrapper>
