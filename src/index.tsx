@@ -9,6 +9,7 @@ import { HomeView } from "./views/Home.view";
 import { ContactView } from "./views/Contact.view";
 import { NotFoundView } from "./views/NotFound";
 import { UserView } from "./views/User.view";
+import { CalcView } from "./views/Calc.view";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ ReactDOM.render(
           <Route component={HomeView} path="/" exact />
           <Route component={ContactView} path="/contato" exact />
           <Route component={UserView} path="/usuario/:userId" />
+          <Route component={CalcView} path="/calc/:a/:b" />
           <Route component={NotFoundView} />
         </Switch>
       </BrowserRouter>
