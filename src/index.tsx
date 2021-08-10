@@ -5,6 +5,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
+import { Navbar } from "./components/Navbar";
+
 import { HomeView } from "./views/Home.view";
 import { ContactView } from "./views/Contact.view";
 import { NotFoundView } from "./views/NotFound";
@@ -14,17 +16,8 @@ import { CalcView } from "./views/Calc.view";
 ReactDOM.render(
   <React.StrictMode>
     <div>
-      <nav>
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/contato">Contato</a>
-          </li>
-        </ul>
-      </nav>
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route component={HomeView} path="/" exact />
           <Route component={ContactView} path="/contato" exact />
