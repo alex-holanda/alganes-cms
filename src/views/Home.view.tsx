@@ -1,3 +1,3 @@
-export function Home() {
+export function HomeView() {
   return <>Home</>;
 }

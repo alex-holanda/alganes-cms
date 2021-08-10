@@ -5,9 +5,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-import { Home } from "./views/Home.view";
-import { Contact } from "./views/Contact.view";
-import { NotFound } from "./views/NotFound";
+import { HomeView } from "./views/Home.view";
+import { ContactView } from "./views/Contact.view";
+import { NotFoundView } from "./views/NotFound";
+import { UserView } from "./views/User.view";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,9 +25,10 @@ ReactDOM.render(
       </nav>
       <BrowserRouter>
         <Switch>
-          <Route component={Home} path="/" exact />
-          <Route component={Contact} path="/contato" exact />
-          <Route component={NotFound} />
+          <Route component={HomeView} path="/" exact />
+          <Route component={ContactView} path="/contato" exact />
+          <Route component={UserView} path="/usuario/:userId" />
+          <Route component={NotFoundView} />
         </Switch>
       </BrowserRouter>
     </div>

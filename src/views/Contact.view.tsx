@@ -1,3 +1,3 @@
-export function Contact() {
+export function ContactView() {
   return <>Contato</>;
 }
