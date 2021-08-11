@@ -1,3 +1,3 @@
-export default function NotFoundView() {
+export function NotFoundView() {
   return <>404 - Not Found</>;
 }

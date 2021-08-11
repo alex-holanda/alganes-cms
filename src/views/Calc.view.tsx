@@ -5,7 +5,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-export default function CalcView() {
+export function CalcView() {
   const params = useParams<{ a: string; b: string }>();
   const query = useQuery();
 
