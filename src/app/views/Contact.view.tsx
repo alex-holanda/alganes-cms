@@ -1,4 +1,4 @@
-import { usePageTitle } from "../hooks/usePageTitle";
+import { usePageTitle } from "../../core/hooks/usePageTitle";
 
 export function ContactView() {
   usePageTitle("Contato");

@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { SessionController } from "../components/SessionController";
+import { SessionController } from "../app/components/SessionController";
 
 export default {
   title: "Example/SessionController",

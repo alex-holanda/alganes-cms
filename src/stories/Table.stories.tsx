@@ -6,7 +6,7 @@ import { Column, useTable } from "react-table";
 import Icon from "@mdi/react";
 import { mdiOpenInNew } from "@mdi/js";
 
-import { Table } from "../components/Table";
+import { Table } from "../app/components/Table";
 
 export default {
   title: "Example/Table",

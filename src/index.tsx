@@ -2,16 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import "./index.css";
+import "./core/imports.css";
 import reportWebVitals from "./reportWebVitals";
 
-import { Navbar } from "./components/Navbar";
+import { Navbar } from "./app/components/Navbar";
 
-import { HomeView } from "./views/Home.view";
-import { ContactView } from "./views/Contact.view";
-import { NotFoundView } from "./views/NotFound";
-import { UserView } from "./views/User.view";
-import { CalcView } from "./views/Calc.view";
+import { HomeView } from "./app/views/Home.view";
+import { ContactView } from "./app/views/Contact.view";
+import { NotFoundView } from "./app/views/NotFound";
+import { UserView } from "./app/views/User.view";
+import { CalcView } from "./app/views/Calc.view";
 
 ReactDOM.render(
   <React.StrictMode>

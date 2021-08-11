@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { NoData } from "../components/NoData";
+import { NoData } from "../app/components/NoData";
 
 export default {
   title: "Example/NoData",

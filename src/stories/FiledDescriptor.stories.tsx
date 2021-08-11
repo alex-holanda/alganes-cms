@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { FieldDescriptor } from "../components/FieldDescriptor";
+import { FieldDescriptor } from "../app/components/FieldDescriptor";
 
 export default {
   title: "Example/FieldDescriptor",
