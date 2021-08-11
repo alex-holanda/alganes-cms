@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./core/imports.css";
+import GlobalStyles from "./core/globalStyles";
+
 import reportWebVitals from "./reportWebVitals";
 
 import { Navbar } from "./app/components/Navbar";
@@ -15,18 +17,17 @@ import { CalcView } from "./app/views/Calc.view";
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route component={HomeView} path="/" exact />
-          <Route component={ContactView} path="/contato" exact />
-          <Route component={UserView} path="/usuario/:userId" />
-          <Route component={CalcView} path="/calc/:a/:b" />
-          <Route component={NotFoundView} />
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route component={HomeView} path="/" exact />
+        <Route component={ContactView} path="/contato" exact />
+        <Route component={UserView} path="/usuario/:userId" />
+        <Route component={CalcView} path="/calc/:a/:b" />
+        <Route component={NotFoundView} />
+      </Switch>
+    </BrowserRouter>
+    <GlobalStyles />
   </React.StrictMode>,
   document.getElementById("root")
 );
