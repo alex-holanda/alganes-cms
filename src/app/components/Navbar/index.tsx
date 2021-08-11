@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -6,19 +6,29 @@ export function Navbar() {
   return (
     <List>
       <Item>
-        <Link to="/">Início</Link>
+        <NavLink to="/" exact>
+          Início
+        </NavLink>
       </Item>
       <Item>
-        <Link to="/contato">artigos</Link>
+        <NavLink to="/contato" exact>
+          artigos
+        </NavLink>
       </Item>
       <Item>
-        <Link to="/contato">portifólio</Link>
+        <NavLink to="/c" exact>
+          portifólio
+        </NavLink>
       </Item>
       <Item>
-        <Link to="/contato">storage</Link>
+        <NavLink to="/co" exact>
+          storage
+        </NavLink>
       </Item>
       <Item>
-        <Link to="/contato">usuários</Link>
+        <NavLink to="/cont" exact>
+          usuários
+        </NavLink>
       </Item>
     </List>
   );
@@ -38,5 +48,10 @@ const Item = styled.li`
   a {
     text-decoration: none;
     color: #274060;
+
+    &.active {
+      color: #09f;
+      font-weight: 700;
+    }
   }
 `;
