@@ -7,8 +7,6 @@ import GlobalStyles from "./core/globalStyles";
 
 import reportWebVitals from "./reportWebVitals";
 
-import { Navbar } from "./app/components/Navbar";
-
 import { HomeView } from "./app/views/Home.view";
 import { ContactView } from "./app/views/Contact.view";
 import { NotFoundView } from "./app/views/NotFound";
@@ -18,7 +16,6 @@ import { CalcView } from "./app/views/Calc.view";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Navbar />
       <Switch>
         <Route component={HomeView} path="/" exact />
         <Route component={ContactView} path="/contato" exact />
