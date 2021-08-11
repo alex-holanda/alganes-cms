@@ -19,10 +19,7 @@ function DefaultLayout(props: DefaultLayoutProps) {
         <DL.Navigation>
           <Navbar />
         </DL.Navigation>
-        <DL.FeaturedContent>
-          todo: featuredContent
-          {props.children}
-        </DL.FeaturedContent>
+        <DL.FeaturedContent>{props.children}</DL.FeaturedContent>
         <DL.Aside>
           <SessionController
             name="Alex Holanda"
