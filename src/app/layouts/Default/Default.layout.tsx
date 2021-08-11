@@ -1,4 +1,8 @@
+import Logo from "../../components/Logo";
+
 import { Navbar } from "../../components/Navbar";
+import { SessionController } from "../../components/SessionController";
+
 import * as DL from "./Default.layout.styles";
 
 interface DefaultLayoutProps {
@@ -8,7 +12,9 @@ interface DefaultLayoutProps {
 function DefaultLayout(props: DefaultLayoutProps) {
   return (
     <DL.Wrapper>
-      <DL.Header>header</DL.Header>
+      <DL.Header>
+        <Logo />
+      </DL.Header>
       <DL.Main>
         <DL.Navigation>
           <Navbar />
@@ -17,7 +23,13 @@ function DefaultLayout(props: DefaultLayoutProps) {
           todo: featuredContent
           {props.children}
         </DL.FeaturedContent>
-        <DL.Aside>aside</DL.Aside>
+        <DL.Aside>
+          <SessionController
+            name="Alex Holanda"
+            description="editor há 2 anos"
+            onLogout={() => console.log("logout")}
+          />
+        </DL.Aside>
       </DL.Main>
     </DL.Wrapper>
   );
