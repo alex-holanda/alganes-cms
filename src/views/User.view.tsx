@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
-export function UserView() {
+export default function UserView() {
   const params = useParams<{ userId: string }>();
 
   useEffect(() => {

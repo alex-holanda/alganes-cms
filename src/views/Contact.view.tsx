@@ -1,6 +1,6 @@
 import { usePageTitle } from "../hooks/usePageTitle";
 
-export function ContactView() {
+export default function ContactView() {
   usePageTitle("Contato");
   return <>Contato</>;
 }

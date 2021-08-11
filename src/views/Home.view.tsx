@@ -1,6 +1,6 @@
 import { usePageTitle } from "../hooks/usePageTitle";
 
-export function HomeView() {
+export default function HomeView() {
   usePageTitle("Home");
   return <>Home</>;
 }

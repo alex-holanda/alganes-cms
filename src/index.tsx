@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -7,24 +7,26 @@ import reportWebVitals from "./reportWebVitals";
 
 import { Navbar } from "./components/Navbar";
 
-import { HomeView } from "./views/Home.view";
-import { ContactView } from "./views/Contact.view";
-import { NotFoundView } from "./views/NotFound";
-import { UserView } from "./views/User.view";
-import { CalcView } from "./views/Calc.view";
+const HomeView = React.lazy(() => import("./views/Home.view"));
+const ContactView = React.lazy(() => import("./views/Contact.view"));
+const NotFoundView = React.lazy(() => import("./views/NotFound"));
+const UserView = React.lazy(() => import("./views/User.view"));
+const CalcView = React.lazy(() => import("./views/Calc.view"));
 
 ReactDOM.render(
   <React.StrictMode>
     <div>
       <BrowserRouter>
         <Navbar />
-        <Switch>
-          <Route component={HomeView} path="/" exact />
-          <Route component={ContactView} path="/contato" exact />
-          <Route component={UserView} path="/usuario/:userId" />
-          <Route component={CalcView} path="/calc/:a/:b" />
-          <Route component={NotFoundView} />
-        </Switch>
+        <Suspense fallback={<div>Carregando...</div>}>
+          <Switch>
+            <Route component={HomeView} path="/" exact />
+            <Route component={ContactView} path="/contato" exact />
+            <Route component={UserView} path="/usuario/:userId" />
+            <Route component={CalcView} path="/calc/:a/:b" />
+            <Route component={NotFoundView} />
+          </Switch>
+        </Suspense>
       </BrowserRouter>
     </div>
   </React.StrictMode>,
