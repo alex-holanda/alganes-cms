@@ -3,14 +3,16 @@ import { usePageTitle } from "../../core/hooks/usePageTitle";
 import DefaultLayout from "../layouts/Default";
 
 import { PostsList } from "../features/PostsList";
-import { UserMetrics } from "../features/UserMetrics";
+import { UserPerformance } from "../features/UserPerformance";
+import { UserTopTags } from "../features/UserTopTags";
 
 export function HomeView() {
   usePageTitle("Home");
 
   return (
     <DefaultLayout>
-      <UserMetrics />
+      <UserTopTags />
+      <UserPerformance />
       <PostsList />
     </DefaultLayout>
   );

@@ -23,7 +23,7 @@ export const Circle = styled.circle`
   transition: stroke-dashoffset 850ms ease;
 `;
 
-export const CircleBG = styled.circle.attrs({ fill: "#fff" })``;
+export const CircleBG = styled.circle.attrs({ fill: "transparent" })``;
 
 interface PercentageProps {
   theme?: "default" | "primary";
