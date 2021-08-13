@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   gap: 16px;
 `;
 
-export const Header = styled.head`
+export const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;

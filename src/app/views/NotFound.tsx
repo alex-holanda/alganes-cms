@@ -2,14 +2,14 @@ import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 
-import NotConnectedImg from "../../assets/not-connected.svg";
+// import NotConnectedImg from "../../assets/not-connected.svg";
 
 export function NotFoundView() {
   return (
     <Wrapper>
       <h1>Oops!</h1>
       <p>Não encontramos esta página</p>
-      <img src={NotConnectedImg} alt="" />
+      {/* <img src={NotConnectedImg} alt="" /> */}
       <NavLink to="/" exact>
         Ir para a home
       </NavLink>

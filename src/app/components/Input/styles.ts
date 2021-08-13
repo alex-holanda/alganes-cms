@@ -18,6 +18,7 @@ export const Wrapper = styled.label`
     font-size: 18px;
     font-weight: 500;
     padding-bottom: 6px;
+    background-color: transparent;
 
     border: none;
     outline: none;

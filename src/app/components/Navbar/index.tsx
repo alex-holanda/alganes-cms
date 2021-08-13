@@ -10,24 +10,16 @@ export function Navbar() {
           Início
         </NavLink>
       </Item>
-      <Item>
-        <NavLink to="/contato" exact>
-          artigos
-        </NavLink>
-      </Item>
-      <Item>
-        <NavLink to="/c" exact>
-          portifólio
-        </NavLink>
-      </Item>
-      <Item>
-        <NavLink to="/co" exact>
-          storage
-        </NavLink>
-      </Item>
+
       <Item>
         <NavLink to="/editores" exact>
           editores
+        </NavLink>
+      </Item>
+
+      <Item>
+        <NavLink to="/posts/criar" exact>
+          novo post
         </NavLink>
       </Item>
     </List>

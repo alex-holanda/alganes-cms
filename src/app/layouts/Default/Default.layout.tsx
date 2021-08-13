@@ -1,4 +1,4 @@
-import Logo from "../../components/Logo";
+import { Logo } from "../../components/Logo";
 
 import { Navbar } from "../../components/Navbar";
 import { SessionController } from "../../components/SessionController";
