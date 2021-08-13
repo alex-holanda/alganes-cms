@@ -8,19 +8,15 @@ import GlobalStyles from "./core/globalStyles";
 import reportWebVitals from "./reportWebVitals";
 
 import { HomeView } from "./app/views/Home.view";
-import { ContactView } from "./app/views/Contact.view";
 import { NotFoundView } from "./app/views/NotFound";
-import { UserView } from "./app/views/User.view";
-import { CalcView } from "./app/views/Calc.view";
+import { EditorsListView } from "./app/views/EditorsList.view";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
         <Route component={HomeView} path="/" exact />
-        <Route component={ContactView} path="/contato" exact />
-        <Route component={UserView} path="/usuario/:userId" />
-        <Route component={CalcView} path="/calc/:a/:b" />
+        <Route component={EditorsListView} path="/editores" exact />
         <Route component={NotFoundView} />
       </Switch>
     </BrowserRouter>

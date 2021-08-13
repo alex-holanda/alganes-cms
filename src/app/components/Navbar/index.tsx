@@ -26,8 +26,8 @@ export function Navbar() {
         </NavLink>
       </Item>
       <Item>
-        <NavLink to="/cont" exact>
-          usuários
+        <NavLink to="/editores" exact>
+          editores
         </NavLink>
       </Item>
     </List>
