@@ -1,5 +1,11 @@
 import DefaultLayout from "../layouts/Default";
 
+import { EditorProfile } from "../features/EditorProfile";
+
 export function EditorProfileView() {
-  return <DefaultLayout>todo: editor profile view</DefaultLayout>;
+  return (
+    <DefaultLayout>
+      <EditorProfile />
+    </DefaultLayout>
+  );
 }
