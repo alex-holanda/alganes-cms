@@ -10,26 +10,28 @@ interface ConfirmProps {
 }
 
 export function confirm(props: ConfirmProps) {
-  confirmAlert({
-    overlayClassName: "confirm-overlay",
-    customUI: ({ onClose }) => {
-      return (
-        <Confirm
-          title={props.title}
-          onConfirm={() => {
-            if (props.onConfirm) {
-              props.onConfirm();
-            }
-            onClose();
-          }}
-          onCancel={() => {
-            if (props.onCancel) {
-              props.onCancel();
-            }
-            onClose();
-          }}
-        />
-      );
-    },
-  });
+  setTimeout(() => {
+    confirmAlert({
+      overlayClassName: "confirm-overlay",
+      customUI: ({ onClose }) => {
+        return (
+          <Confirm
+            title={props.title}
+            onConfirm={() => {
+              if (props.onConfirm) {
+                props.onConfirm();
+              }
+              onClose();
+            }}
+            onCancel={() => {
+              if (props.onCancel) {
+                props.onCancel();
+              }
+              onClose();
+            }}
+          />
+        );
+      },
+    });
+  }, 0);
 }
