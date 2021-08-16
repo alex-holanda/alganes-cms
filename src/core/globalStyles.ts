@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { transparentize } from "polished";
 
 export default createGlobalStyle`
   * {
@@ -22,5 +23,9 @@ export default createGlobalStyle`
   a {
     color: indianred;
     text-decoration: none;
+  }
+
+  .confirm-overlay {
+    background-color: ${transparentize(0.2, "#274060")};
   }
 `;
