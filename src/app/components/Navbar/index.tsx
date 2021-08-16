@@ -12,9 +12,7 @@ export function Navbar() {
       </Item>
 
       <Item>
-        <NavLink to="/editores" exact>
-          editores
-        </NavLink>
+        <NavLink to="/editores">editores</NavLink>
       </Item>
 
       <Item>
