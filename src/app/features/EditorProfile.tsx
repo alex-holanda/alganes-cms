@@ -4,7 +4,11 @@ import { FieldDescriptor } from "../components/FieldDescriptor";
 import { ProgressBar } from "../components/ProgressBar";
 import { ValueDescriptor } from "../components/ValueDescriptor";
 
-export function EditorProfile() {
+interface EditorProfileProps {
+  hidePersonalData?: boolean;
+}
+
+export function EditorProfile(props: EditorProfileProps) {
   return (
     <Wrapper>
       <HeadLine>
@@ -37,53 +41,59 @@ export function EditorProfile() {
         <ContactInfo>
           <FieldDescriptor field={"Cidade"} value={"Vila Velha"} />
           <FieldDescriptor field={"Estado"} value={"Espírito Santo"} />
-          <FieldDescriptor field={"Celular"} value={"+55 27 99900-9999"} />
-          <FieldDescriptor
-            field={"E-mail"}
-            value={"ana.castillo@redacao.algacontent.com"}
-          />
-          <FieldDescriptor
-            field={"Nascimento"}
-            value={"26 de Dezembro de 1997 (22 anos)"}
-          />
+          {!props.hidePersonalData && (
+            <>
+              <FieldDescriptor field={"Telefone"} value={"+55 27 99900-9999"} />
+              <FieldDescriptor
+                field={"E-mail"}
+                value={"ana.castillo@redacao.algacontent.com"}
+              />
+              <FieldDescriptor
+                field={"Nascimento"}
+                value={"26 de Dezembro de 1997 (22 anos)"}
+              />
+            </>
+          )}
         </ContactInfo>
       </Features>
 
-      <Earnings>
-        <ValueDescriptor
-          color={"default"}
-          value={21452}
-          description={"Palavras nesta semana"}
-        />
-        <ValueDescriptor
-          color={"default"}
-          value={123234}
-          description={"Palavras no mês"}
-        />
-        <ValueDescriptor
-          color={"default"}
-          value={12312312}
-          description={"Total de palavras"}
-        />
-        <ValueDescriptor
-          color={"primary"}
-          value={545623.23}
-          description={"Ganhos na semana"}
-          isCurrency
-        />
-        <ValueDescriptor
-          color={"primary"}
-          value={545623.23}
-          description={"Ganhos no mês"}
-          isCurrency
-        />
-        <ValueDescriptor
-          color={"primary"}
-          value={545623.23}
-          description={"Ganhos no total"}
-          isCurrency
-        />
-      </Earnings>
+      {!props.hidePersonalData && (
+        <Earnings>
+          <ValueDescriptor
+            color={"default"}
+            value={21452}
+            description={"Palavras nesta semana"}
+          />
+          <ValueDescriptor
+            color={"default"}
+            value={123234}
+            description={"Palavras no mês"}
+          />
+          <ValueDescriptor
+            color={"default"}
+            value={12312312}
+            description={"Total de palavras"}
+          />
+          <ValueDescriptor
+            color={"primary"}
+            value={545623.23}
+            description={"Ganhos na semana"}
+            isCurrency
+          />
+          <ValueDescriptor
+            color={"primary"}
+            value={545623.23}
+            description={"Ganhos no mês"}
+            isCurrency
+          />
+          <ValueDescriptor
+            color={"primary"}
+            value={545623.23}
+            description={"Ganhos no total"}
+            isCurrency
+          />
+        </Earnings>
+      )}
     </Wrapper>
   );
 }
