@@ -12,6 +12,7 @@ import { NotFoundView } from "./app/views/NotFound";
 import { EditorsListView } from "./app/views/EditorsList.view";
 import { PostCreateView } from "./app/views/PostCreateView.view";
 import { EditorProfileView } from "./app/views/EditorProfile.view";
+import { http } from "./core/http";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,6 +29,18 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+async function getDataFromApi() {
+  try {
+    const response = await http.get("/posts");
+    const posts = response.data;
+    console.log(posts);
+  } catch (error) {
+    console.log(`Houve um erro: ${error.message}`);
+  }
+}
+
+getDataFromApi();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
