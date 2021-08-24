@@ -1,4 +1,4 @@
-import { AlgaNews } from "./alganews";
+import { AlgaNews } from "./AlgaNews";
 
 export namespace Metric {
   export type MonthlyRevenuesExpenses = AlgaNews.components["schemas"]["MonthlyRevenuesExpenses"];

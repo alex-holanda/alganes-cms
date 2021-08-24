@@ -1,4 +1,4 @@
-import { AlgaNews } from "./alganews";
+import { AlgaNews } from "./AlgaNews";
 
 export namespace CashFlow {
   export type CategoryDetailed = AlgaNews.components["schemas"]["CashFlowCategoryDetailed"];

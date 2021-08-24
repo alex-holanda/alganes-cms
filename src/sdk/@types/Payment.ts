@@ -1,4 +1,4 @@
-import { AlgaNews } from "./alganews";
+import { AlgaNews } from "./AlgaNews";
 
 export namespace Payment {
   export type Input = AlgaNews.components["schemas"]["PaymentInput"];
