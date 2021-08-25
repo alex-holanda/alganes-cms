@@ -1,9 +1,14 @@
 import { Post } from "../@types";
 import Service from "../Service";
+import generateQueryString from "../utils/generateQueryString";
 
 class PostService extends Service {
-  static getAllPosts() {
-    return this.Http.get<Post.Paginated>("/posts").then(this.getData);
+  static getAllPosts(search: Post.Query) {
+    const queryString = generateQueryString(search);
+
+    return this.Http.get<Post.Paginated>("/posts".concat(queryString)).then(
+      this.getData
+    );
   }
 
   static getExistingPost(id: number) {

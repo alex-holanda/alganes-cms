@@ -1,7 +1,17 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import PostService from "../../sdk/services/Post.service";
 import { Profile } from "../components/Profile";
 
 export function EditorsList() {
+  useEffect(() => {
+    PostService.getAllPosts({
+      editorId: 1,
+      sort: ["id", "desc"],
+      size: 2,
+    });
+  }, []);
+
   return (
     <EditorsListWrapper>
       <Profile
