@@ -7,6 +7,14 @@ class FileService extends Service {
       .then(this.getData)
       .then((res) => res.uploadSignedUrl);
   }
+
+  static uploadFileToSignedUrl(signedUrl: string, file: File) {
+    return this.Http.put<{}>(signedUrl, file, {
+      headers: {
+        "Content-Type": file.type,
+      },
+    }).then(this.getData);
+  }
 }
 
 export default FileService;
