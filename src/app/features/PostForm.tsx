@@ -16,9 +16,10 @@ import { TagInput } from "../components/TagInput";
 import { WordPriceCounter } from "../components/WordPriceCounter";
 
 export function PostForm() {
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [body, setBody] = useState("");
+  const [tags, setTags] = useState<Tag[]>([]);
 
   async function handleFormSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -27,7 +28,7 @@ export function PostForm() {
       body,
       title,
       tags: tags.map((tag) => tag.text),
-      imageUrl: "",
+      imageUrl,
     };
 
     const insertedPost = await PostService.insertNewPost(newPost);
@@ -47,7 +48,7 @@ export function PostForm() {
         placeholder="e.g.: Como fiquei rico aprendendo React"
       />
 
-      <ImageUpload label="Thumbnail do post" />
+      <ImageUpload label="Thumbnail do post" onImageUpload={setImageUrl} />
 
       <MarkdownEditor onChange={setBody} />
 

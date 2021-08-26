@@ -8,6 +8,7 @@ import FileService from "../../../sdk/services/File.service";
 
 interface ImageUploadProps {
   label: string;
+  onImageUpload: (imageUrl: string) => any;
 }
 
 export function ImageUpload(props: ImageUploadProps) {
@@ -21,7 +22,7 @@ export function ImageUpload(props: ImageUploadProps) {
         setFilePreview(String(e.target?.result));
 
         const imageUrl = await FileService.upload(file);
-        console.log(imageUrl);
+        props.onImageUpload(imageUrl);
       });
 
       reader.readAsDataURL(file);
