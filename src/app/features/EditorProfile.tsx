@@ -1,5 +1,11 @@
 import { transparentize } from "polished";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { getEditorDescription } from "../../core/utils/getEditorDescription";
+import { User } from "../../sdk/@types";
+import UserService from "../../sdk/services/User.service";
 import { FieldDescriptor } from "../components/FieldDescriptor";
 import { ProgressBar } from "../components/ProgressBar";
 import { ValueDescriptor } from "../components/ValueDescriptor";
@@ -9,38 +15,50 @@ interface EditorProfileProps {
 }
 
 export function EditorProfile(props: EditorProfileProps) {
+  const params = useParams<{ id: string }>();
+  const [editor, setEditor] = useState<User.EditorDetailed>();
+
+  useEffect(() => {
+    UserService.getExistingEditor(Number(params.id)).then(setEditor);
+  }, [params.id]);
+
+  if (!editor) {
+    return null;
+  }
+
   return (
     <Wrapper>
       <HeadLine>
-        <Avatar
-          src={
-            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-          }
-        />
-        <Name>Ana Calisto</Name>
-        <Description>Editora há 5 anos</Description>
+        <Avatar src={editor.avatarUrls.small} />
+        <Name>{editor.name}</Name>
+        <Description>
+          {getEditorDescription(new Date(editor.createdAt))}
+        </Description>
       </HeadLine>
 
       <Divisor />
 
       <Features>
         <PersonalInfo>
-          <Biography>
-            {
-              "Ana Calisto é especialista em recrutamento de desenvolvedores e ama escrever dicas para ajudar os devs a encontrarem a vaga certa para elas. Atualmente tem uma empresa de Recruitment e é redatora no alga content"
-            }
-          </Biography>
+          <Biography>{editor.bio}</Biography>
 
           <Skills>
-            <ProgressBar progress={96} title={"JavaScript"} theme="primary" />
-            <ProgressBar progress={86} title={"React"} theme="primary" />
-            <ProgressBar progress={67} title={"Node"} theme="primary" />
+            {editor.skills?.map((skill, index) => {
+              return (
+                <ProgressBar
+                  key={index}
+                  progress={skill.percentage}
+                  title={skill.name}
+                  theme="primary"
+                />
+              );
+            })}
           </Skills>
         </PersonalInfo>
 
         <ContactInfo>
-          <FieldDescriptor field={"Cidade"} value={"Vila Velha"} />
-          <FieldDescriptor field={"Estado"} value={"Espírito Santo"} />
+          <FieldDescriptor field={"Cidade"} value={editor.location.city} />
+          <FieldDescriptor field={"Estado"} value={editor.location.state} />
           {!props.hidePersonalData && (
             <>
               <FieldDescriptor field={"Telefone"} value={"+55 27 99900-9999"} />
