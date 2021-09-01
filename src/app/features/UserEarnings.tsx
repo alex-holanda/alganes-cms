@@ -1,31 +1,45 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import { User } from "../../sdk/@types";
+import UserService from "../../sdk/services/User.service";
 import { ValueDescriptor } from "../components/ValueDescriptor";
 
 export function UserEarnings() {
+  const [user, setUser] = useState<User.Detailed>();
+
+  useEffect(() => {
+    UserService.getDetailedUser(7).then(setUser);
+  }, []);
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <UserEarningsWrapper>
       <ValueDescriptor
         color="primary"
         description="ganhos no mês"
-        value={563222.32}
+        value={user.metrics.monthlyEarnings}
         isCurrency
       />
       <ValueDescriptor
         color="primary"
         description="ganhos na semana"
-        value={563222.32}
+        value={user.metrics.weeklyEarnings}
         isCurrency
       />
       <ValueDescriptor
         color="default"
         description="ganhos de sempre"
-        value={563222.32}
+        value={user.metrics.lifetimeEarnings}
         isCurrency
       />
       <ValueDescriptor
         color="default"
         description="total de palavras"
-        value={2_345_346}
+        value={user.metrics.lifetimeWords}
       />
     </UserEarningsWrapper>
   );
