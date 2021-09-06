@@ -8,12 +8,20 @@ import { Chart, ChartProps } from "../components/Chart";
 
 export function UserPerformance() {
   const [editorEarnings, setEditorEarnings] = useState<ChartProps["data"]>();
+  const [error, setError] = useState<Error>();
 
   useEffect(() => {
     MetricService.getEditorMonthlyEarnings()
       .then(transformEditorMonthlyEarningsIntoChartJS)
-      .then(setEditorEarnings);
+      .then(setEditorEarnings)
+      .catch((error) => {
+        setError(new Error(error.message));
+      });
   }, []);
+
+  if (error) {
+    throw error;
+  }
 
   if (!editorEarnings) {
     return null;

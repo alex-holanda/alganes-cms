@@ -6,6 +6,7 @@ import { PostsList } from "../features/PostsList";
 import { UserPerformance } from "../features/UserPerformance";
 import { UserTopTags } from "../features/UserTopTags";
 import { UserEarnings } from "../features/UserEarnings";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 export function HomeView() {
   usePageTitle("Home");
@@ -20,11 +21,20 @@ export function HomeView() {
           gap: "32px",
         }}
       >
-        <UserTopTags />
-        <UserEarnings />
+        <ErrorBoundary component={"top tags"}>
+          <UserTopTags />
+        </ErrorBoundary>
+        <ErrorBoundary component={"ganhos"}>
+          <UserEarnings />
+        </ErrorBoundary>
       </div>
-      <UserPerformance />
-      <PostsList />
+      <ErrorBoundary component={"performance"}>
+        <UserPerformance />
+      </ErrorBoundary>
+
+      <ErrorBoundary component={"lista de posts"}>
+        <PostsList />
+      </ErrorBoundary>
     </DefaultLayout>
   );
 }

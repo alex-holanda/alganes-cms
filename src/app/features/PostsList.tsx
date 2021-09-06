@@ -14,6 +14,7 @@ import { format } from "date-fns";
 
 export function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>();
+  const [error, setError] = useState<Error>();
 
   useEffect(() => {
     PostService.getAllPosts({
@@ -21,8 +22,14 @@ export function PostsList() {
       size: 7,
       showAll: true,
       sort: ["createdAt", "desc"],
-    }).then(setPosts);
+    })
+      .then(setPosts)
+      .catch((error) => setError(new Error(error.message)));
   }, []);
+
+  if (error) {
+    throw error;
+  }
 
   const columns = useMemo<Column<Post.Summary>[]>(
     () => [
@@ -71,7 +78,7 @@ export function PostsList() {
       },
       {
         Header: () => (
-          <div style={{ textAlign: "left" }}>Última atualização</div>
+          <div style={{ textAlign: "right" }}>Última atualização</div>
         ),
         accessor: "updatedAt",
         Cell: (props) => (
