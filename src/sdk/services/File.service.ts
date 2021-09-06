@@ -1,4 +1,4 @@
-import { v4 } from "uuid";
+import { v4 as uuid } from "uuid";
 import { File } from "../@types";
 import Service from "../Service";
 
@@ -18,7 +18,7 @@ class FileService extends Service {
   }
 
   private static generateFileName(extension: string) {
-    return `${v4()}.${extension}`;
+    return `${uuid()}.${extension}`;
   }
 
   private static getFileExtension(fileName: string) {
