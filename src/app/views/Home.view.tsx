@@ -3,7 +3,7 @@ import { usePageTitle } from "../../core/hooks/usePageTitle";
 import DefaultLayout from "../layouts/Default";
 
 import { PostsList } from "../features/PostsList";
-import { UserPerformance } from "../features/UserPerformance";
+import UserPerformance from "../features/UserPerformance";
 import { UserTopTags } from "../features/UserTopTags";
 import { UserEarnings } from "../features/UserEarnings";
 import ErrorBoundary from "../components/ErrorBoundary";
@@ -28,9 +28,7 @@ export function HomeView() {
           <UserEarnings />
         </ErrorBoundary>
       </div>
-      <ErrorBoundary component={"performance"}>
-        <UserPerformance />
-      </ErrorBoundary>
+      <UserPerformance />
 
       <ErrorBoundary component={"lista de posts"}>
         <PostsList />
