@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import { User } from "../../sdk/@types";
 import UserService from "../../sdk/services/User.service";
@@ -20,7 +21,14 @@ export function UserEarnings() {
   }
 
   if (!user) {
-    return null;
+    return (
+      <UserEarningsWrapper style={{ height: 123 }}>
+        <Skeleton width={150} height={40} />
+        <Skeleton width={150} height={40} />
+        <Skeleton width={150} height={40} />
+        <Skeleton width={150} height={40} />
+      </UserEarningsWrapper>
+    );
   }
 
   return (

@@ -6,6 +6,7 @@ import { CircleChart } from "../components/CircleChart";
 import { Metric } from "../../sdk/@types";
 import { useEffect } from "react";
 import MetricService from "../../sdk/services/Metric.service";
+import Skeleton from "react-loading-skeleton";
 
 export function UserTopTags() {
   const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([]);
@@ -19,6 +20,16 @@ export function UserTopTags() {
 
   if (error) {
     throw error;
+  }
+
+  if (!topTags.length) {
+    return (
+      <UserTopTagsWrapper>
+        <Skeleton height={88} circle={true} width={88} />
+        <Skeleton height={88} circle={true} width={88} />
+        <Skeleton height={88} circle={true} width={88} />
+      </UserTopTagsWrapper>
+    );
   }
 
   return (
