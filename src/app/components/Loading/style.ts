@@ -13,6 +13,22 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  backdrop-filter: blur(5px);
+
+  @keyframes slidein {
+    from {
+      transform: rgba(0, 0, 0, 0);
+      opacity: 0;
+    }
+
+    to {
+      transform: rgba(0, 0, 0, 0.7);
+      opacity: 1;
+    }
+  }
+
+  animation: 0.25s pop ease;
+
   .lds-ring {
     display: inline-block;
     position: relative;

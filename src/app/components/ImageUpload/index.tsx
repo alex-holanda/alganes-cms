@@ -5,6 +5,7 @@ import { mdiDelete, mdiUpload } from "@mdi/js";
 
 import * as IU from "./styles";
 import FileService from "../../../sdk/services/File.service";
+import Loading from "../Loading";
 
 interface ImageUploadProps {
   label: string;
@@ -14,15 +15,22 @@ interface ImageUploadProps {
 export function ImageUpload(props: ImageUploadProps) {
   const [filePreview, setFilePreview] = useState<string | null>(null);
 
+  const [uploadingImage, setUploadingImage] = useState(false);
+
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files![0];
     if (file) {
       const reader = new FileReader();
       reader.addEventListener("load", async (e) => {
-        setFilePreview(String(e.target?.result));
+        try {
+          setUploadingImage(true);
+          setFilePreview(String(e.target?.result));
 
-        const imageUrl = await FileService.upload(file);
-        props.onImageUpload(imageUrl);
+          const imageUrl = await FileService.upload(file);
+          props.onImageUpload(imageUrl);
+        } finally {
+          setUploadingImage(false);
+        }
       });
 
       reader.readAsDataURL(file);
@@ -32,6 +40,7 @@ export function ImageUpload(props: ImageUploadProps) {
   if (filePreview) {
     return (
       <IU.ImagePreviewWrapper>
+        <Loading show={uploadingImage} />
         <IU.ImagePreview preview={filePreview}>
           <IU.ButtonWrapper onClick={() => setFilePreview(null)}>
             <span>Remover Imagem</span>
