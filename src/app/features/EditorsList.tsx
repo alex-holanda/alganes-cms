@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
 
 import styled from "styled-components";
 import { getEditorDescription } from "../../core/utils/getEditorDescription";
@@ -15,6 +16,16 @@ export function EditorsList() {
   useEffect(() => {
     UserService.getAllEditors().then(setEditors);
   }, []);
+
+  if (!editors.length) {
+    return (
+      <EditorsListWrapper>
+        <Skeleton width={328} height={82} />
+        <Skeleton width={328} height={82} />
+        <Skeleton width={328} height={82} />
+      </EditorsListWrapper>
+    );
+  }
 
   return (
     <EditorsListWrapper>
