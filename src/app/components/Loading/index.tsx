@@ -1,6 +1,14 @@
 import { Wrapper } from "./style";
 
-export default function Loading() {
+interface LoadingProps {
+  show?: boolean;
+}
+
+export default function Loading(props: LoadingProps) {
+  if (!props.show) {
+    return null;
+  }
+
   return (
     <Wrapper>
       <div className="lds-ring">
