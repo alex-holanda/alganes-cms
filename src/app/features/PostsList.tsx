@@ -6,6 +6,7 @@ import Icon from "@mdi/react";
 import { Column, useTable, usePagination } from "react-table";
 
 import { Table } from "../components/Table";
+import Loading from "../components/Loading";
 
 import { Post } from "../../sdk/@types";
 import PostService from "../../sdk/services/Post.service";
@@ -16,17 +17,21 @@ import Skeleton from "react-loading-skeleton";
 export function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>();
   const [error, setError] = useState<Error>();
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     PostService.getAllPosts({
-      page: 0,
+      page,
       size: 7,
       showAll: true,
       sort: ["createdAt", "desc"],
     })
       .then(setPosts)
-      .catch((error) => setError(new Error(error.message)));
-  }, []);
+      .catch((error) => setError(new Error(error.message)))
+      .finally(() => setLoading(false));
+  }, [page]);
 
   if (error) {
     throw error;
@@ -135,5 +140,10 @@ export function PostsList() {
     );
   }
 
-  return <Table instance={instance} />;
+  return (
+    <>
+      <Loading show={loading} />
+      <Table instance={instance} onPaginate={setPage} />;
+    </>
+  );
 }

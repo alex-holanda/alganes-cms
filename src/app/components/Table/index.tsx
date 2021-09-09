@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { TableInstance } from "react-table";
 import { Button } from "../Button";
 import { NoData } from "../NoData";
@@ -6,11 +7,13 @@ import * as T from "./styles";
 
 interface TableProps<T extends Object> {
   instance: TableInstance<T>;
+  onPaginate?: (newPage: number) => any;
 }
 
-export function Table<T extends Object>({ instance }: TableProps<T>) {
-  // const tableInstance = useTable<>({ data, columns });
-
+export function Table<T extends Object>({
+  instance,
+  onPaginate,
+}: TableProps<T>) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -26,6 +29,10 @@ export function Table<T extends Object>({ instance }: TableProps<T>) {
     previousPage,
     state: { pageIndex },
   } = instance;
+
+  useEffect(() => {
+    onPaginate && onPaginate(pageIndex);
+  }, [onPaginate, pageIndex]);
 
   return (
     <>
