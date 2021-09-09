@@ -1,4 +1,5 @@
 import { TableInstance } from "react-table";
+import { Button } from "../Button";
 import { NoData } from "../NoData";
 
 import * as T from "./styles";
@@ -16,6 +17,14 @@ export function Table<T extends Object>({ instance }: TableProps<T>) {
     prepareRow,
     headerGroups,
     rows,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    state: { pageIndex },
   } = instance;
 
   return (
@@ -57,6 +66,37 @@ export function Table<T extends Object>({ instance }: TableProps<T>) {
           <NoData height={360} />
         </T.WithoutData>
       )}
+
+      <T.TablePagination>
+        <Button
+          variant="primary"
+          label={"Página anterior"}
+          onClick={() => gotoPage(0)}
+          disabled={!canPreviousPage}
+        />
+        <Button
+          variant="primary"
+          label={"Primeira anterior"}
+          onClick={previousPage}
+          disabled={!canPreviousPage}
+        />
+        <Button
+          variant="primary"
+          label={"Próxima página"}
+          onClick={nextPage}
+          disabled={!canNextPage}
+        />
+        <Button
+          variant="primary"
+          label={"Última página"}
+          onClick={() => gotoPage(pageCount - 1)}
+          disabled={!canNextPage}
+        />
+
+        <span>
+          Página {pageIndex + 1} de {pageOptions.length}
+        </span>
+      </T.TablePagination>
     </>
   );
 }

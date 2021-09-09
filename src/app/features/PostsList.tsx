@@ -3,7 +3,7 @@ import { useMemo, useEffect, useState } from "react";
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
 
-import { Column, useTable } from "react-table";
+import { Column, useTable, usePagination } from "react-table";
 
 import { Table } from "../components/Table";
 
@@ -107,10 +107,18 @@ export function PostsList() {
     []
   );
 
-  const instance = useTable<Post.Summary>({
-    data: posts?.content || [],
-    columns,
-  });
+  const instance = useTable<Post.Summary>(
+    {
+      data: posts?.content || [],
+      columns,
+      manualPagination: true,
+      initialState: {
+        pageIndex: 0,
+      },
+      pageCount: posts?.totalPages,
+    },
+    usePagination
+  );
 
   if (!posts) {
     return (

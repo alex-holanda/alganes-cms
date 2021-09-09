@@ -33,3 +33,8 @@ export const BodyCell = styled.td`
 export const WithoutData = styled.div`
   background-color: ${transparentize(0.95, "#274060")};
 `;
+
+export const TablePagination = styled.div`
+  display: flex;
+  gap: 8px;
+`;
