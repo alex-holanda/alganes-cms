@@ -143,7 +143,7 @@ export function PostsList() {
   return (
     <>
       <Loading show={loading} />
-      <Table instance={instance} onPaginate={setPage} />;
+      <Table instance={instance} onPaginate={setPage} />
     </>
   );
 }
