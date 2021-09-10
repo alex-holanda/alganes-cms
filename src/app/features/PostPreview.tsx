@@ -1,19 +1,51 @@
+import { useEffect, useState } from "react";
+
 import withBoundary from "../../core/hoc/withBoundary";
 
-import styled from "styled-components";
+import { Post } from "../../sdk/@types";
+import PostService from "../../sdk/services/Post.service";
 
 import { Button } from "../components/Button";
 import { MarkdownEditor } from "../components/MarkdownEditor";
+import Loading from "../components/Loading";
+
+import styled from "styled-components";
 
 interface PostPreviewProps {
   postId: number;
 }
 
 function PostPreviw(props: PostPreviewProps) {
+  const [post, setPost] = useState<Post.Detailed>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error>();
+
+  useEffect(() => {
+    setLoading(true);
+    PostService.getExistingPost(props.postId)
+      .then(setPost)
+      .catch((error) => {
+        setError(new Error(error.message));
+      })
+      .finally(() => setLoading(false));
+  }, [props.postId]);
+
+  if (loading) {
+    return <Loading show={loading} />;
+  }
+
+  if (error) {
+    throw error;
+  }
+
+  if (!post) {
+    return null;
+  }
+
   return (
     <Wrapper>
       <Header>
-        <Title>{"Como fiquei rico Aprendendo React"}</Title>
+        <Title>{post.title}</Title>
 
         <Actions>
           <Button variant="danger" label="Publicar" />
@@ -21,15 +53,9 @@ function PostPreviw(props: PostPreviewProps) {
         </Actions>
       </Header>
 
-      <ImageWrapper>
-        <ImagePreview
-          url={
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMv_XRZ0UjiUG8YjFt3agB3qdMzB5YNNZbG07oDYhN2hBdAnHIRv6Ppyih4KS4OhHW0Qc&usqp=CAU"
-          }
-        />
-      </ImageWrapper>
+      <ImagePreview src={post.imageUrls.default} />
 
-      <MarkdownEditor readOnly value="## Olá mundo \n- teste \n -teste" />
+      <MarkdownEditor readOnly value={post.body} />
     </Wrapper>
   );
 }
@@ -58,22 +84,15 @@ const Actions = styled.div`
   margin-left: auto;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
 `;
 
-const ImageWrapper = styled.div`
+const ImagePreview = styled.img`
   height: 240px;
-`;
-
-interface ImagePreviewProps {
-  url: string;
-}
-
-const ImagePreview = styled.div<ImagePreviewProps>`
-  height: 100%;
-  background-image: url(${(props) => props.url});
-  background-size: cover;
-  background-repeat: no-repeat;
+  width: 100%;
+  object-fit: cover;
 `;
 
 export default withBoundary(PostPreviw);

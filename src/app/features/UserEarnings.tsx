@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import styled from "styled-components";
 import { User } from "../../sdk/@types";
