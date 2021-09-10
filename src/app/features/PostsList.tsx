@@ -13,6 +13,8 @@ import PostService from "../../sdk/services/Post.service";
 
 import { format } from "date-fns";
 import Skeleton from "react-loading-skeleton";
+import PostPreview from "./PostPreview";
+import { modal } from "../../core/utils/modal";
 
 export function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>();
@@ -64,7 +66,18 @@ export function PostsList() {
               alt={props.row.original.editor.name}
               title={props.row.original.editor.name}
             />
-            {props.value}
+            <a
+              href={`/posts/${props.row.original.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+
+                modal({
+                  children: <PostPreview postId={props.row.original.id} />,
+                });
+              }}
+            >
+              {props.value}
+            </a>
           </div>
         ),
       },
