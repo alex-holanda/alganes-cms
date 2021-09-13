@@ -65,5 +65,7 @@ export const Wrapper = styled.button<WrapperProps>`
     border-color: transparent;
 
     pointer-events: none;
+
+    opacity: 0.5;
   }
 `;
