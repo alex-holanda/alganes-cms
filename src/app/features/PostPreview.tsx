@@ -10,6 +10,9 @@ import { MarkdownEditor } from "../components/MarkdownEditor";
 import Loading from "../components/Loading";
 
 import styled from "styled-components";
+import { info } from "../../core/utils/info";
+import { confirm } from "../../core/utils/confirm";
+import { modal } from "../../core/utils/modal";
 
 interface PostPreviewProps {
   postId: number;
@@ -19,6 +22,20 @@ function PostPreviw(props: PostPreviewProps) {
   const [post, setPost] = useState<Post.Detailed>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
+
+  async function publishPost() {
+    await PostService.publishExistingPost(props.postId);
+    info({
+      title: "Post publicado",
+      description: "Você publicou o post com sucesso",
+    });
+  }
+
+  function reopenModal() {
+    modal({
+      children: <PostPreviw postId={props.postId} />,
+    });
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -48,7 +65,18 @@ function PostPreviw(props: PostPreviewProps) {
         <Title>{post.title}</Title>
 
         <Actions>
-          <Button variant="danger" label="Publicar" disabled={post.published} />
+          <Button
+            variant="danger"
+            label="Publicar"
+            disabled={post.published}
+            onClick={() =>
+              confirm({
+                title: "Publicar o post?",
+                onConfirm: publishPost,
+                onCancel: reopenModal,
+              })
+            }
+          />
           <Button variant="primary" label="Editar" disabled={post.published} />
         </Actions>
       </Header>
