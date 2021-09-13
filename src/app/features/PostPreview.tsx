@@ -77,7 +77,14 @@ function PostPreviw(props: PostPreviewProps) {
               })
             }
           />
-          <Button variant="primary" label="Editar" disabled={post.published} />
+          <Button
+            variant="primary"
+            label="Editar"
+            disabled={post.published}
+            onClick={() =>
+              (window.location.pathname = `/posts/editar/${post.id}`)
+            }
+          />
         </Actions>
       </Header>
 
