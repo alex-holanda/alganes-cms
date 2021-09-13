@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 import { Tag } from "react-tag-input";
 
@@ -17,6 +18,8 @@ import { TagInput } from "../components/TagInput";
 import { WordPriceCounter } from "../components/WordPriceCounter";
 
 export function PostForm() {
+  const history = useHistory();
+
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [body, setBody] = useState("");
@@ -43,6 +46,8 @@ export function PostForm() {
         title: "Post salvo com sucesso",
         description: `Você acabou de criar o post com o id + ${insertedPost.id}`,
       });
+
+      history.push("/");
     } finally {
       setPublishing(false);
     }
@@ -76,7 +81,12 @@ export function PostForm() {
           wordsCounter={countWordsInMarkdown(body)}
         />
 
-        <Button variant="primary" label="Salvar post" type="submit" />
+        <Button
+          variant="primary"
+          label="Salvar post"
+          type="submit"
+          disabled={!title || !imageUrl || !body || !tags.length}
+        />
       </PostFormSubmitWrapper>
     </PostFormWrapper>
   );
