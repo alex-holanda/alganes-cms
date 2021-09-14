@@ -39,7 +39,7 @@ export function PostForm(props: PostFormProps) {
       imageUrl,
     };
 
-    const insertedPost = await PostService.insertNewPost(newPost);
+    await PostService.insertNewPost(newPost);
 
     info({
       title: "Post salvo com sucesso",
