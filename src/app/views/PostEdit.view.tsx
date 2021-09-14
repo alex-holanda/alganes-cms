@@ -5,7 +5,7 @@ import { PostForm } from "../features/PostForm";
 import { useParams } from "react-router";
 
 export function PostEditView() {
-  usePageTitle("post");
+  usePageTitle("Editando post");
 
   const params = useParams<{ id: string }>();
   return (
