@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import Skeleton from "react-loading-skeleton";
 
-import styled from "styled-components";
-import { getEditorDescription } from "../../core/utils/getEditorDescription";
-import { User } from "../../sdk/@types";
+import { UserService } from "alex-holanda-sdk";
+import { User } from "alex-holanda-sdk/dist/@types";
 
-import UserService from "../../sdk/services/User.service";
+import styled from "styled-components";
+
+import { getEditorDescription } from "../../core/utils/getEditorDescription";
 
 import { Profile } from "../components/Profile";
 

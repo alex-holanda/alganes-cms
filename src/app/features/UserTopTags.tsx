@@ -1,12 +1,13 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from "react";
+
+import Skeleton from "react-loading-skeleton";
 
 import { CircleChart } from "../components/CircleChart";
 
-import { Metric } from "../../sdk/@types";
-import { useEffect } from "react";
-import MetricService from "../../sdk/services/Metric.service";
-import Skeleton from "react-loading-skeleton";
+import { Metric } from "alex-holanda-sdk/dist/@types";
+import { MetricService } from "alex-holanda-sdk";
+
+import styled from "styled-components";
 
 export function UserTopTags() {
   const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([]);

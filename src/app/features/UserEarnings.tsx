@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
+
 import Skeleton from "react-loading-skeleton";
-import styled from "styled-components";
-import { User } from "../../sdk/@types";
-import UserService from "../../sdk/services/User.service";
+
+import { UserService } from "alex-holanda-sdk";
+import { User } from "alex-holanda-sdk/dist/@types";
+
 import { ValueDescriptor } from "../components/ValueDescriptor";
+
+import styled from "styled-components";
 
 export function UserEarnings() {
   const [user, setUser] = useState<User.Detailed>();

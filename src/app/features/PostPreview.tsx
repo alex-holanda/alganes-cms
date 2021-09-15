@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-import withBoundary from "../../core/hoc/withBoundary";
-
-import { Post } from "../../sdk/@types";
-import PostService from "../../sdk/services/Post.service";
-
 import { Button } from "../components/Button";
 import { MarkdownEditor } from "../components/MarkdownEditor";
 import Loading from "../components/Loading";
 
 import styled from "styled-components";
+
+import withBoundary from "../../core/hoc/withBoundary";
 import { info } from "../../core/utils/info";
 import { confirm } from "../../core/utils/confirm";
 import { modal } from "../../core/utils/modal";
+
+import { Post } from "alex-holanda-sdk/dist/@types";
+import { PostService } from "alex-holanda-sdk";
 
 interface PostPreviewProps {
   postId: number;
