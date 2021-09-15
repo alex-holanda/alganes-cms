@@ -1,14 +1,17 @@
-import { transparentize } from "polished";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
+
 import { getEditorDescription } from "../../core/utils/getEditorDescription";
-import { User } from "../../sdk/@types";
-import UserService from "../../sdk/services/User.service";
+
 import { FieldDescriptor } from "../components/FieldDescriptor";
 import { ProgressBar } from "../components/ProgressBar";
 import { ValueDescriptor } from "../components/ValueDescriptor";
+
+import styled from "styled-components";
+import { transparentize } from "polished";
+
+import { User } from "alex-holanda-sdk/dist/@types";
+import { UserService } from "alex-holanda-sdk";
 
 interface EditorProfileProps {
   hidePersonalData?: boolean;

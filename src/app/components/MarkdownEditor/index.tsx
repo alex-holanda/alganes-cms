@@ -1,8 +1,9 @@
 import MdEditor, { Plugins } from "react-markdown-editor-lite";
 import MarkdownIt from "markdown-it";
 
+import { FileService } from "alex-holanda-sdk";
+
 import "react-markdown-editor-lite/lib/index.css";
-import FileService from "../../../sdk/services/File.service";
 
 MdEditor.unuse(Plugins.FontUnderline);
 

@@ -4,8 +4,9 @@ import Icon from "@mdi/react";
 import { mdiDelete, mdiUpload } from "@mdi/js";
 
 import * as IU from "./styles";
-import FileService from "../../../sdk/services/File.service";
 import Loading from "../Loading";
+
+import { FileService } from "alex-holanda-sdk";
 
 interface ImageUploadProps {
   label: string;

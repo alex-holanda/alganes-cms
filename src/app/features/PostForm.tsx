@@ -3,11 +3,12 @@ import { useHistory } from "react-router";
 
 import { Tag } from "react-tag-input";
 
+import { PostService } from "alex-holanda-sdk";
+
 import styled from "styled-components";
 
 import { countWordsInMarkdown } from "../../core/utils/countWordsInMarkdown";
 import { info } from "../../core/utils/info";
-import PostService from "../../sdk/services/Post.service";
 
 import { Button } from "../components/Button";
 import { ImageUpload } from "../components/ImageUpload";

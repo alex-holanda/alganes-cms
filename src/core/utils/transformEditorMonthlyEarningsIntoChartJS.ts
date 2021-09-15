@@ -1,8 +1,8 @@
+import { Metric } from "alex-holanda-sdk/dist/@types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import { ChartProps } from "../../app/components/Chart";
-import { Metric } from "../../sdk/@types";
 
 function transformEditorMonthlyEarningsIntoChartJS(
   editorEarnings: Metric.EditorMonthlyEarnings

@@ -8,14 +8,17 @@ import { Column, useTable, usePagination } from "react-table";
 import { Table } from "../components/Table";
 import Loading from "../components/Loading";
 
-import { Post } from "../../sdk/@types";
-import PostService from "../../sdk/services/Post.service";
-
 import { format } from "date-fns";
+
 import Skeleton from "react-loading-skeleton";
+
 import PostPreview from "./PostPreview";
-import { modal } from "../../core/utils/modal";
 import PostTitleAnchor from "../components/PostTitleAnchor";
+
+import { modal } from "../../core/utils/modal";
+
+import { Post } from "alex-holanda-sdk/dist/@types";
+import { PostService } from "alex-holanda-sdk";
 
 export function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>();
