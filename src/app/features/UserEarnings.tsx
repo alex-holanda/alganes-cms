@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 
 import Skeleton from "react-loading-skeleton";
 
-import { UserService } from "alex-holanda-sdk";
-import { User } from "alex-holanda-sdk/dist/@types";
+import { User, UserService } from "alex-holanda-sdk";
 
 import { ValueDescriptor } from "../components/ValueDescriptor";
 

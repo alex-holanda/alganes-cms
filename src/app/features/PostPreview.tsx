@@ -11,8 +11,7 @@ import { info } from "../../core/utils/info";
 import { confirm } from "../../core/utils/confirm";
 import { modal } from "../../core/utils/modal";
 
-import { Post } from "alex-holanda-sdk/dist/@types";
-import { PostService } from "alex-holanda-sdk";
+import { Post, PostService } from "alex-holanda-sdk";
 
 interface PostPreviewProps {
   postId: number;

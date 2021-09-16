@@ -10,8 +10,7 @@ import { ValueDescriptor } from "../components/ValueDescriptor";
 import styled from "styled-components";
 import { transparentize } from "polished";
 
-import { User } from "alex-holanda-sdk/dist/@types";
-import { UserService } from "alex-holanda-sdk";
+import { UserService, User } from "alex-holanda-sdk";
 
 interface EditorProfileProps {
   hidePersonalData?: boolean;

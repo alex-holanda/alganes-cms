@@ -1,4 +1,4 @@
-import { Metric } from "alex-holanda-sdk/dist/@types";
+import { Metric } from "alex-holanda-sdk";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 

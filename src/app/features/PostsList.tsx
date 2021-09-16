@@ -17,8 +17,7 @@ import PostTitleAnchor from "../components/PostTitleAnchor";
 
 import { modal } from "../../core/utils/modal";
 
-import { Post } from "alex-holanda-sdk/dist/@types";
-import { PostService } from "alex-holanda-sdk";
+import { Post, PostService } from "alex-holanda-sdk";
 
 export function PostsList() {
   const [posts, setPosts] = useState<Post.Paginated>();

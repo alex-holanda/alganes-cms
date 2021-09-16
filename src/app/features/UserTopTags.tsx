@@ -4,8 +4,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { CircleChart } from "../components/CircleChart";
 
-import { Metric } from "alex-holanda-sdk/dist/@types";
-import { MetricService } from "alex-holanda-sdk";
+import { Metric, MetricService } from "alex-holanda-sdk";
 
 import styled from "styled-components";
 
