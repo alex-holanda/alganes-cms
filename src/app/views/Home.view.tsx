@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { addPost } from "../../core/store/Post.slice";
+import { fetchPosts } from "../../core/store/Post.slice";
 import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts";
 
 import { usePageTitle } from "../../core/hooks/usePageTitle";
@@ -60,7 +60,7 @@ export function HomeView() {
   return (
     <DefaultLayout>
       <div>
-        <button onClick={() => dispatch(addPost(fakePost))}>
+        <button onClick={() => dispatch(fetchPosts({ page: 2 }))}>
           Add fake post
         </button>
         {paginatedPosts?.map((post) => (

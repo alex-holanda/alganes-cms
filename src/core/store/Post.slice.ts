@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Post } from "alex-holanda-sdk";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+
+import { Post, PostService } from "alex-holanda-sdk";
 
 interface PostSliceState {
   paginated?: Post.Paginated;
@@ -24,6 +25,14 @@ const postSlice = createSlice({
     },
   },
 });
+
+export const fetchPosts = createAsyncThunk(
+  "post/fetchPosts",
+  async function (query: Post.Query) {
+    const posts = await PostService.getAllPosts(query);
+    return posts;
+  }
+);
 
 export const postReducer = postSlice.reducer;
 export const { addPost } = postSlice.actions;
