@@ -1,6 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addPost } from "../../core/store/Post.slice";
+import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts";
 
 import { usePageTitle } from "../../core/hooks/usePageTitle";
 
@@ -11,7 +12,6 @@ import UserPerformance from "../features/UserPerformance";
 import { UserTopTags } from "../features/UserTopTags";
 import { UserEarnings } from "../features/UserEarnings";
 import ErrorBoundary from "../components/ErrorBoundary";
-import { useEffect } from "react";
 
 const fakePost = {
   id: 42,
@@ -55,13 +55,18 @@ const fakePost = {
 export function HomeView() {
   usePageTitle("Home");
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(addPost(fakePost));
-  }, [dispatch]);
+  const paginatedPosts = useSelector(selectPaginatedPosts);
 
   return (
     <DefaultLayout>
+      <div>
+        <button onClick={() => dispatch(addPost(fakePost))}>
+          Add fake post
+        </button>
+        {paginatedPosts?.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </div>
       <div
         style={{
           display: "grid",
