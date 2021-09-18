@@ -1,9 +1,16 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+  isPending,
+  isFulfilled,
+} from "@reduxjs/toolkit";
 
 import { Post, PostService } from "alex-holanda-sdk";
 
 interface PostSliceState {
   paginated?: Post.Paginated;
+  fetching: boolean;
 }
 
 const initialState: PostSliceState = {
@@ -14,7 +21,16 @@ const initialState: PostSliceState = {
     totalPages: 1,
     content: [],
   },
+  fetching: false,
 };
+
+export const fetchPosts = createAsyncThunk(
+  "post/fetchPosts",
+  async function (query: Post.Query) {
+    const posts = await PostService.getAllPosts(query);
+    return posts;
+  }
+);
 
 const postSlice = createSlice({
   name: "post",
@@ -24,15 +40,19 @@ const postSlice = createSlice({
       state.paginated?.content?.push(action.payload);
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.paginated = action.payload;
+      })
+      .addMatcher(isPending, (state) => {
+        state.fetching = true;
+      })
+      .addMatcher(isFulfilled, (state) => {
+        state.fetching = false;
+      });
+  },
 });
-
-export const fetchPosts = createAsyncThunk(
-  "post/fetchPosts",
-  async function (query: Post.Query) {
-    const posts = await PostService.getAllPosts(query);
-    return posts;
-  }
-);
 
 export const postReducer = postSlice.reducer;
 export const { addPost } = postSlice.actions;
