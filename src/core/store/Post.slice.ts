@@ -4,6 +4,7 @@ import {
   createAsyncThunk,
   isPending,
   isFulfilled,
+  isRejected,
 } from "@reduxjs/toolkit";
 
 import { Post, PostService } from "alex-holanda-sdk";
@@ -41,14 +42,21 @@ const postSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    const pendingActions = isPending(fetchPosts);
+    const fulfilledActions = isFulfilled(fetchPosts);
+    const rejectedActions = isRejected(fetchPosts);
+
     builder
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.paginated = action.payload;
       })
-      .addMatcher(isPending, (state) => {
+      .addMatcher(pendingActions, (state) => {
         state.fetching = true;
       })
-      .addMatcher(isFulfilled, (state) => {
+      .addMatcher(fulfilledActions, (state) => {
+        state.fetching = false;
+      })
+      .addMatcher(rejectedActions, (state) => {
         state.fetching = false;
       });
   },
