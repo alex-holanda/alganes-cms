@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPosts } from "../../core/store/Post.slice";
-import selectPaginatedPosts from "../../core/selectors/selectPaginatedPosts";
+import { increment } from "../../core/store/Post.slice";
 
 import { usePageTitle } from "../../core/hooks/usePageTitle";
 
@@ -12,21 +11,18 @@ import UserPerformance from "../features/UserPerformance";
 import { UserTopTags } from "../features/UserTopTags";
 import { UserEarnings } from "../features/UserEarnings";
 import ErrorBoundary from "../components/ErrorBoundary";
+import selectPostsCounter from "../../core/selectors/selectPostsCounter";
 
 export function HomeView() {
   usePageTitle("Home");
   const dispatch = useDispatch();
-  const paginatedPosts = useSelector(selectPaginatedPosts);
+  const counter = useSelector(selectPostsCounter);
 
   return (
     <DefaultLayout>
       <div>
-        <button onClick={() => dispatch(fetchPosts({ page: 0 }))}>
-          Add fake post
-        </button>
-        {paginatedPosts?.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
+        <button onClick={() => dispatch(increment())}>Disparar ação</button>
+        {counter}
       </div>
       <div
         style={{

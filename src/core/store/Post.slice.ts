@@ -1,10 +1,9 @@
 import {
-  createSlice,
-  PayloadAction,
   createAsyncThunk,
   isPending,
   isFulfilled,
-  isRejected,
+  createReducer,
+  createAction,
 } from "@reduxjs/toolkit";
 
 import { Post, PostService } from "alex-holanda-sdk";
@@ -12,6 +11,7 @@ import { Post, PostService } from "alex-holanda-sdk";
 interface PostSliceState {
   paginated?: Post.Paginated;
   fetching: boolean;
+  counter: number;
 }
 
 const initialState: PostSliceState = {
@@ -22,6 +22,7 @@ const initialState: PostSliceState = {
     totalPages: 1,
     content: [],
   },
+  counter: 0,
   fetching: false,
 };
 
@@ -33,34 +34,20 @@ export const fetchPosts = createAsyncThunk(
   }
 );
 
-const postSlice = createSlice({
-  name: "post",
-  initialState,
-  reducers: {
-    addPost(state, action: PayloadAction<Post.Summary>) {
-      state.paginated?.content?.push(action.payload);
-    },
-  },
-  extraReducers(builder) {
-    const pendingActions = isPending(fetchPosts);
-    const fulfilledActions = isFulfilled(fetchPosts);
-    const rejectedActions = isRejected(fetchPosts);
+export const increment = createAction("post/increment");
 
-    builder
-      .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.paginated = action.payload;
-      })
-      .addMatcher(pendingActions, (state) => {
-        state.fetching = true;
-      })
-      .addMatcher(fulfilledActions, (state) => {
-        state.fetching = false;
-      })
-      .addMatcher(rejectedActions, (state) => {
-        state.fetching = false;
-      });
-  },
+export const postReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(increment, (state) => {
+      state.counter++;
+    })
+    .addCase(fetchPosts.fulfilled, (state, action) => {
+      state.paginated = action.payload;
+    })
+    .addMatcher(isPending, (state) => {
+      state.fetching = true;
+    })
+    .addMatcher(isFulfilled, (state) => {
+      state.fetching = false;
+    });
 });
-
-export const postReducer = postSlice.reducer;
-export const { addPost } = postSlice.actions;
