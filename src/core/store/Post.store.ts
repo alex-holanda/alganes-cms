@@ -4,17 +4,18 @@ import {
   isFulfilled,
   createReducer,
   createAction,
+  isRejected,
 } from "@reduxjs/toolkit";
 
 import { Post, PostService } from "alex-holanda-sdk";
 
-interface PostSliceState {
+interface PostStoreState {
   paginated?: Post.Paginated;
   fetching: boolean;
   counter: number;
 }
 
-const initialState: PostSliceState = {
+const initialState: PostStoreState = {
   paginated: {
     page: 0,
     size: 0,
@@ -48,6 +49,9 @@ export const postReducer = createReducer(initialState, (builder) => {
       state.fetching = true;
     })
     .addMatcher(isFulfilled(fetchPosts), (state) => {
+      state.fetching = false;
+    })
+    .addMatcher(isRejected(fetchPosts), (state) => {
       state.fetching = false;
     });
 });

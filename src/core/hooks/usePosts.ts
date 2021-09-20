@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import * as PostActions from "../store/Post.slice";
+import * as PostActions from "../store/Post.store";
 
 import selectPaginatedPosts from "../selectors/selectPaginatedPosts";
 import selectPostsFetching from "../selectors/selectPostsFetching";

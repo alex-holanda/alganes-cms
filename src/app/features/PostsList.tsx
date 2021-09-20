@@ -3,6 +3,8 @@ import { useMemo, useEffect, useState } from "react";
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
 
+import usePosts from "../../core/hooks/usePosts";
+
 import { Column, useTable, usePagination } from "react-table";
 
 import { Table } from "../components/Table";
@@ -17,26 +19,21 @@ import PostTitleAnchor from "../components/PostTitleAnchor";
 
 import { modal } from "../../core/utils/modal";
 
-import { Post, PostService } from "alex-holanda-sdk";
+import { Post } from "alex-holanda-sdk";
 
 export function PostsList() {
-  const [posts, setPosts] = useState<Post.Paginated>();
+  const { fetchPosts, paginatedPosts, loading } = usePosts();
   const [error, setError] = useState<Error>();
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    PostService.getAllPosts({
+    fetchPosts({
       page,
       size: 5,
-      showAll: true,
+      showAll: false,
       sort: ["createdAt", "desc"],
-    })
-      .then(setPosts)
-      .catch((error) => setError(new Error(error.message)))
-      .finally(() => setLoading(false));
-  }, [page]);
+    }).catch(setError);
+  }, [page, fetchPosts]);
 
   if (error) {
     throw error;
@@ -132,18 +129,18 @@ export function PostsList() {
 
   const instance = useTable<Post.Summary>(
     {
-      data: posts?.content || [],
+      data: paginatedPosts?.content || [],
       columns,
       manualPagination: true,
       initialState: {
         pageIndex: 0,
       },
-      pageCount: posts?.totalPages,
+      pageCount: paginatedPosts?.totalPages,
     },
     usePagination
   );
 
-  if (!posts) {
+  if (!paginatedPosts) {
     return (
       <div>
         <Skeleton height={32} />
