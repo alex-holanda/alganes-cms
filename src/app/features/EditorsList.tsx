@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import Skeleton from "react-loading-skeleton";
-
-import { User, UserService } from "alex-holanda-sdk";
 
 import styled from "styled-components";
 

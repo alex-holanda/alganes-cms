@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { getEditorDescription } from "../../core/utils/getEditorDescription";
+import useSingleEditor from "../../core/hooks/useSingleEditor";
 
 import { FieldDescriptor } from "../components/FieldDescriptor";
 import { ProgressBar } from "../components/ProgressBar";
@@ -10,19 +11,17 @@ import { ValueDescriptor } from "../components/ValueDescriptor";
 import styled from "styled-components";
 import { transparentize } from "polished";
 
-import { UserService, User } from "alex-holanda-sdk";
-
 interface EditorProfileProps {
   hidePersonalData?: boolean;
 }
 
 export function EditorProfile(props: EditorProfileProps) {
   const params = useParams<{ id: string }>();
-  const [editor, setEditor] = useState<User.EditorDetailed>();
+  const { editor, fetchEditor } = useSingleEditor();
 
   useEffect(() => {
-    UserService.getExistingEditor(Number(params.id)).then(setEditor);
-  }, [params.id]);
+    fetchEditor(Number(params.id));
+  }, [fetchEditor, params.id]);
 
   if (!editor) {
     return null;
