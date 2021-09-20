@@ -8,16 +8,18 @@ import styled from "styled-components";
 
 import { getEditorDescription } from "../../core/utils/getEditorDescription";
 
+import useEditors from "../../core/hooks/useEditors";
+
 import { Profile } from "../components/Profile";
 
 export function EditorsList() {
-  const [editors, setEditors] = useState<User.EditorSummary[]>([]);
+  const { editorsList, fetchAllEditors, loading } = useEditors();
 
   useEffect(() => {
-    UserService.getAllEditors().then(setEditors);
-  }, []);
+    fetchAllEditors();
+  }, [fetchAllEditors]);
 
-  if (!editors.length) {
+  if (!editorsList.length) {
     return (
       <EditorsListWrapper>
         <Skeleton width={328} height={82} />
@@ -29,7 +31,7 @@ export function EditorsList() {
 
   return (
     <EditorsListWrapper>
-      {editors.map((editor) => {
+      {editorsList.map((editor) => {
         return (
           <Profile
             key={editor.id}
@@ -40,6 +42,7 @@ export function EditorsList() {
           />
         );
       })}
+      {loading && "buscando mais informações"}
     </EditorsListWrapper>
   );
 }

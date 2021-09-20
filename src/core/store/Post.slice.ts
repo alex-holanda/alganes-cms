@@ -44,10 +44,10 @@ export const postReducer = createReducer(initialState, (builder) => {
     .addCase(fetchPosts.fulfilled, (state, action) => {
       state.paginated = action.payload;
     })
-    .addMatcher(isPending, (state) => {
+    .addMatcher(isPending(fetchPosts), (state) => {
       state.fetching = true;
     })
-    .addMatcher(isFulfilled, (state) => {
+    .addMatcher(isFulfilled(fetchPosts), (state) => {
       state.fetching = false;
     });
 });
