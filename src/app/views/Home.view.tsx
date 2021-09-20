@@ -8,21 +8,18 @@ import { UserTopTags } from "../features/UserTopTags";
 import { UserEarnings } from "../features/UserEarnings";
 import ErrorBoundary from "../components/ErrorBoundary";
 import usePosts from "../../core/hooks/usePosts";
+import { useEffect } from "react";
 
 export function HomeView() {
   usePageTitle("Home");
   const { paginatedPosts, loading, fetchPosts } = usePosts();
 
+  useEffect(() => {
+    fetchPosts({ page: 1 });
+  }, [fetchPosts]);
+
   return (
     <DefaultLayout>
-      <button
-        onClick={() => {
-          fetchPosts({ page: 1 });
-        }}
-      >
-        Add fake post
-      </button>
-
       {loading ? "carregando" : "finalizado"}
       <hr />
 
