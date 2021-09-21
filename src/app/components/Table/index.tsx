@@ -32,7 +32,7 @@ export function Table<T extends Object>({
   }, [onPaginate, pageIndex]);
 
   return (
-    <>
+    <div>
       <T.Wrapper {...getTableProps()} cellPadding="0" cellSpacing="0">
         <T.Heading>
           {headerGroups.map((headerGroup) => (
@@ -81,6 +81,6 @@ export function Table<T extends Object>({
           nextLabel={<Icon path={mdiChevronRight} size={"16px"} />}
         />
       </T.TablePagination>
-    </>
+    </div>
   );
 }
