@@ -2,32 +2,26 @@ import { useState, useEffect } from "react";
 
 import Skeleton from "react-loading-skeleton";
 
-import { MetricService } from "alex-holanda-sdk";
-
 import withBoundary from "../../core/hoc/withBoundary";
+import usePerformance from "../../core/hooks/usePerformance";
 
-import transformEditorMonthlyEarningsIntoChartJS from "../../core/utils/transformEditorMonthlyEarningsIntoChartJS";
-
-import { Chart, ChartProps } from "../components/Chart";
+import { Chart } from "../components/Chart";
 
 function UserPerformance() {
-  const [editorEarnings, setEditorEarnings] = useState<ChartProps["data"]>();
+  const { performance, fetchPerformance } = usePerformance();
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    MetricService.getEditorMonthlyEarnings()
-      .then(transformEditorMonthlyEarningsIntoChartJS)
-      .then(setEditorEarnings)
-      .catch((error) => {
-        setError(new Error(error.message));
-      });
-  }, []);
+    fetchPerformance().catch((error) => {
+      setError(new Error(error.message));
+    });
+  }, [fetchPerformance]);
 
   if (error) {
     throw error;
   }
 
-  if (!editorEarnings) {
+  if (!performance) {
     return (
       <div>
         <Skeleton height={227} />
@@ -38,7 +32,7 @@ function UserPerformance() {
   return (
     <Chart
       title="Média de performance nos últimos 12 meses"
-      data={editorEarnings}
+      data={performance}
     />
   );
 }

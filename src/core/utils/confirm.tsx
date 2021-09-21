@@ -5,8 +5,8 @@ import { Confirm } from "../../app/components/Confirm";
 
 interface ConfirmProps {
   title: string;
-  onConfirm?: () => any;
-  onCancel?: () => any;
+  onConfirm?: (...args: any[]) => void;
+  onCancel?: (...args: any[]) => void;
 }
 
 export function confirm(props: ConfirmProps) {

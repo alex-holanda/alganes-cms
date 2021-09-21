@@ -7,28 +7,18 @@ import Loading from "../components/Loading";
 import styled from "styled-components";
 
 import withBoundary from "../../core/hoc/withBoundary";
-import { info } from "../../core/utils/info";
+
 import { confirm } from "../../core/utils/confirm";
 import { modal } from "../../core/utils/modal";
-
-import { Post, PostService } from "alex-holanda-sdk";
+import useSinglePost from "../../core/hooks/useSinglePost";
 
 interface PostPreviewProps {
   postId: number;
 }
 
 function PostPreviw(props: PostPreviewProps) {
-  const [post, setPost] = useState<Post.Detailed>();
-  const [loading, setLoading] = useState(false);
+  const { post, loading, fetchPost, publishPost } = useSinglePost();
   const [error, setError] = useState<Error>();
-
-  async function publishPost() {
-    await PostService.publishExistingPost(props.postId);
-    info({
-      title: "Post publicado",
-      description: "Você publicou o post com sucesso",
-    });
-  }
 
   function reopenModal() {
     modal({
@@ -37,14 +27,10 @@ function PostPreviw(props: PostPreviewProps) {
   }
 
   useEffect(() => {
-    setLoading(true);
-    PostService.getExistingPost(props.postId)
-      .then(setPost)
-      .catch((error) => {
-        setError(new Error(error.message));
-      })
-      .finally(() => setLoading(false));
-  }, [props.postId]);
+    fetchPost(props.postId).catch((error) => {
+      setError(new Error(error.message));
+    });
+  }, [fetchPost, props.postId]);
 
   if (loading) {
     return <Loading show={loading} />;
@@ -71,7 +57,7 @@ function PostPreviw(props: PostPreviewProps) {
             onClick={() =>
               confirm({
                 title: "Publicar o post?",
-                onConfirm: publishPost,
+                onConfirm: () => publishPost(post.id),
                 onCancel: reopenModal,
               })
             }

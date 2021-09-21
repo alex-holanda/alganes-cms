@@ -4,19 +4,16 @@ import Skeleton from "react-loading-skeleton";
 
 import { CircleChart } from "../components/CircleChart";
 
-import { Metric, MetricService } from "alex-holanda-sdk";
-
 import styled from "styled-components";
+import useTopTags from "../../core/hooks/useTopTags";
 
 export function UserTopTags() {
-  const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([]);
+  const { topTags, fetchTopTags } = useTopTags();
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    MetricService.getTop3Tags()
-      .then(setTopTags)
-      .catch((error) => setError(new Error(error.message)));
-  }, []);
+    fetchTopTags().catch((error) => setError(new Error(error.message)));
+  }, [fetchTopTags]);
 
   if (error) {
     throw error;

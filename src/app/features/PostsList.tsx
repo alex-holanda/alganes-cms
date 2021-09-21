@@ -30,7 +30,7 @@ export function PostsList() {
     fetchPosts({
       page,
       size: 5,
-      showAll: false,
+      showAll: true,
       sort: ["createdAt", "desc"],
     }).catch(setError);
   }, [page, fetchPosts]);
