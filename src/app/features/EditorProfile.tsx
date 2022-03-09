@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 import { getEditorDescription } from "../../core/utils/getEditorDescription";
@@ -10,6 +10,8 @@ import { ValueDescriptor } from "../components/ValueDescriptor";
 
 import styled from "styled-components";
 import { transparentize } from "polished";
+import { useAuth } from "core/hooks/useAuth";
+import { User } from "alex-holanda-sdk";
 
 interface EditorProfileProps {
   hidePersonalData?: boolean;
@@ -17,23 +19,35 @@ interface EditorProfileProps {
 
 export function EditorProfile(props: EditorProfileProps) {
   const params = useParams<{ id: string }>();
+
   const { editor, fetchEditor } = useSingleEditor();
+  const { user } = useAuth();
+
+  const editorIsAuthenticatedUser = useMemo(() => {
+    return Number(params.id) === user?.id;
+  }, [params.id, user?.id]);
+
+  const editorData = useMemo(() => {
+    return editorIsAuthenticatedUser ? user : editor;
+  }, [editorIsAuthenticatedUser, user, editor]);
 
   useEffect(() => {
-    fetchEditor(Number(params.id));
-  }, [fetchEditor, params.id]);
+    if (!editorIsAuthenticatedUser) {
+      fetchEditor(Number(params.id));
+    }
+  }, [fetchEditor, params.id, editorIsAuthenticatedUser]);
 
-  if (!editor) {
+  if (!editorData) {
     return null;
   }
 
   return (
     <Wrapper>
       <HeadLine>
-        <Avatar src={editor.avatarUrls.small} />
-        <Name>{editor.name}</Name>
+        <Avatar src={editorData.avatarUrls.small} />
+        <Name>{editorData.name}</Name>
         <Description>
-          {getEditorDescription(new Date(editor.createdAt))}
+          {getEditorDescription(new Date(editorData.createdAt))}
         </Description>
       </HeadLine>
 
@@ -41,10 +55,10 @@ export function EditorProfile(props: EditorProfileProps) {
 
       <Features>
         <PersonalInfo>
-          <Biography>{editor.bio}</Biography>
+          <Biography>{editorData.bio}</Biography>
 
           <Skills>
-            {editor.skills?.map((skill, index) => {
+            {editorData.skills?.map((skill, index) => {
               return (
                 <ProgressBar
                   key={index}
@@ -58,56 +72,81 @@ export function EditorProfile(props: EditorProfileProps) {
         </PersonalInfo>
 
         <ContactInfo>
-          <FieldDescriptor field={"Cidade"} value={editor.location.city} />
-          <FieldDescriptor field={"Estado"} value={editor.location.state} />
-          {!props.hidePersonalData && (
-            <>
-              <FieldDescriptor field={"Telefone"} value={"+55 27 99900-9999"} />
-              <FieldDescriptor
-                field={"E-mail"}
-                value={"ana.castillo@redacao.algacontent.com"}
-              />
-              <FieldDescriptor
-                field={"Nascimento"}
-                value={"26 de Dezembro de 1997 (22 anos)"}
-              />
-            </>
+          {editorData.location.city && (
+            <FieldDescriptor
+              field={"Cidade"}
+              value={editorData.location.city}
+            />
+          )}
+
+          {editorData.location.state && (
+            <FieldDescriptor
+              field={"Estado"}
+              value={editorData.location.state}
+            />
+          )}
+
+          {(editorData as User.Detailed).phone && (
+            <FieldDescriptor
+              field={"Telefone"}
+              value={(editorData as User.Detailed).phone}
+            />
+          )}
+
+          {(editorData as User.Detailed).email && (
+            <FieldDescriptor
+              field={"E-mail"}
+              value={(editorData as User.Detailed).email}
+            />
+          )}
+
+          {(editorData as User.Detailed).birthdate && (
+            <FieldDescriptor
+              field={"Nascimento"}
+              value={new Date(
+                (editorData as User.Detailed).birthdate
+              ).toLocaleDateString(navigator.language, {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })}
+            />
           )}
         </ContactInfo>
       </Features>
 
-      {!props.hidePersonalData && (
+      {(editorData as User.Detailed).metrics && (
         <Earnings>
           <ValueDescriptor
             color={"default"}
-            value={21452}
+            value={(editorData as User.Detailed).metrics.weeklyWords}
             description={"Palavras nesta semana"}
           />
           <ValueDescriptor
             color={"default"}
-            value={123234}
+            value={(editorData as User.Detailed).metrics.monthlyWords}
             description={"Palavras no mês"}
           />
           <ValueDescriptor
             color={"default"}
-            value={12312312}
+            value={(editorData as User.Detailed).metrics.lifetimeWords}
             description={"Total de palavras"}
           />
           <ValueDescriptor
             color={"primary"}
-            value={545623.23}
+            value={(editorData as User.Detailed).metrics.weeklyEarnings}
             description={"Ganhos na semana"}
             isCurrency
           />
           <ValueDescriptor
             color={"primary"}
-            value={545623.23}
+            value={(editorData as User.Detailed).metrics.monthlyEarnings}
             description={"Ganhos no mês"}
             isCurrency
           />
           <ValueDescriptor
             color={"primary"}
-            value={545623.23}
+            value={(editorData as User.Detailed).metrics.lifetimeEarnings}
             description={"Ganhos no total"}
             isCurrency
           />

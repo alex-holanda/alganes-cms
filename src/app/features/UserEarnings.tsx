@@ -13,7 +13,7 @@ export function UserEarnings() {
   const [error, setError] = useState<Error>();
 
   useEffect(() => {
-    fetchUser(7).catch((error) => setError(new Error(error.message)));
+    fetchUser().catch((error) => setError(new Error(error.message)));
   }, [fetchUser]);
 
   if (error) {

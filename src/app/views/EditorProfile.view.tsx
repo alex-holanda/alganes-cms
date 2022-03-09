@@ -4,10 +4,11 @@ import { EditorProfile } from "../features/EditorProfile";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 export function EditorProfileView() {
+
   return (
     <DefaultLayout>
       <ErrorBoundary>
-        <EditorProfile hidePersonalData />
+        <EditorProfile />
       </ErrorBoundary>
     </DefaultLayout>
   );
