@@ -44,9 +44,14 @@ export function PostsList() {
       {
         Header: "",
         accessor: "id",
-        Cell: () => (
+        Cell: ({ row }) => (
           <div style={{ paddingLeft: 8, width: "16px" }}>
-            <Icon path={mdiOpenInNew} size={"16px"} color={"#09f"} />
+            <a
+              href={`http://localhost:3002/posts/${row.original.id}/${row.original.slug}`}
+              target={"_blank"} rel="noreferrer noopener"
+            >
+              <Icon path={mdiOpenInNew} size={"16px"} color={"#09f"} />
+            </a>
           </div>
         ),
       },
