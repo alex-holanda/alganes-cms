@@ -9,12 +9,17 @@ import App from "./app";
 import { Provider } from "react-redux";
 import store from "./core/store";
 
+import "./auth/httpConfig";
+
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
     <GlobalStyles />
   </React.StrictMode>,
