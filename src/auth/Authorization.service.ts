@@ -21,7 +21,7 @@ authServer.interceptors.response.use(undefined, async (error) => {
 export default class AuthService {
   public static imperativelySendToLogout() {
     window.localStorage.clear();
-    window.location.href = `http://localhost:8081/logout?redirect=http://localhost:3000`;
+    window.location.href = `http://localhost:8081/logout?redirect=http://localhost:3001`;
   }
 
   public static async getNewToken(config: {
