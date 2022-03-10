@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useCallback } from "react";
 
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
@@ -21,6 +21,8 @@ import { modal } from "../../core/utils/modal";
 
 import { Post } from "alex-holanda-sdk";
 
+import AuthService from "auth/Authorization.service";
+
 export function PostsList() {
   const { fetchPosts, paginatedPosts, loading } = usePosts();
   const [error, setError] = useState<Error>();
@@ -39,6 +41,31 @@ export function PostsList() {
     throw error;
   }
 
+  const openInNew = useCallback(async (post: Post.Summary) => {
+    let url = `http://localhost:3002/posts/${post.id}/${post.slug}`;
+
+    if (!post.published) {
+      const codeVerifier = AuthService.getCodeVerifier();
+      const refreshToken = AuthService.getRefreshToken();
+
+      if (codeVerifier && refreshToken) {
+        const { access_token } = await AuthService.getNewToken({
+          codeVerifier,
+          refreshToken,
+          scope: "post:read",
+        });
+
+        url += `?token=${access_token}`;
+      }
+    }
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noreferrer noopener";
+    a.click();
+  }, []);
+
   const columns = useMemo<Column<Post.Summary>[]>(
     () => [
       {
@@ -46,12 +73,12 @@ export function PostsList() {
         accessor: "id",
         Cell: ({ row }) => (
           <div style={{ paddingLeft: 8, width: "16px" }}>
-            <a
-              href={`http://localhost:3002/posts/${row.original.id}/${row.original.slug}`}
-              target={"_blank"} rel="noreferrer noopener"
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => openInNew(row.original)}
             >
               <Icon path={mdiOpenInNew} size={"16px"} color={"#09f"} />
-            </a>
+            </span>
           </div>
         ),
       },
@@ -108,7 +135,7 @@ export function PostsList() {
       {
         id: Math.random().toString(),
         accessor: "published",
-        Header: () => <div style={{ textAlign: "right" }}>Ações</div>,
+        Header: () => <div style={{ textAlign: "right" }}>Status</div>,
         Cell: (props) => (
           <div style={{ textAlign: "right" }}>
             {props.value ? "Publicado" : "Privado"}
@@ -116,7 +143,7 @@ export function PostsList() {
         ),
       },
     ],
-    []
+    [openInNew]
   );
 
   const instance = useTable<Post.Summary>(
