@@ -7,14 +7,21 @@ import useUser from "../../core/hooks/useUser";
 import { ValueDescriptor } from "../components/ValueDescriptor";
 
 import styled from "styled-components";
+import { useAuth } from "core/hooks/useAuth";
 
 export function UserEarnings() {
   const { user, fetchUser } = useUser();
   const [error, setError] = useState<Error>();
 
+  const { user: authUser } = useAuth();
+
   useEffect(() => {
-    fetchUser().catch((error) => setError(new Error(error.message)));
-  }, [fetchUser]);
+    if (authUser) {
+      fetchUser(authUser.id).catch((error) =>
+        setError(new Error(error.message))
+      );
+    }
+  }, [authUser, fetchUser]);
 
   if (error) {
     throw error;
