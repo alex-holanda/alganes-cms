@@ -6,7 +6,7 @@
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.5.0",
     "@reduxjs/toolkit": "^1.6.1",
-    "alex-holanda-sdk": "^3.0.2",
+    "alex-holanda-sdk": "^3.2.1",
     "axios": "^0.21.1",
     "chart.js": "^2.9.4",
     "date-fns": "^2.23.0",
@@ -35,7 +35,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

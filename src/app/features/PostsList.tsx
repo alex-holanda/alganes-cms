@@ -23,6 +23,8 @@ import { Post } from "alex-holanda-sdk";
 
 import AuthService from "auth/Authorization.service";
 
+const BLOG_BASE_URL = process.env.REACT_APP_BLOG_SERVER_BASE_URL;
+
 export function PostsList() {
   const { fetchPosts, paginatedPosts, loading } = usePosts();
   const [error, setError] = useState<Error>();
@@ -42,7 +44,7 @@ export function PostsList() {
   }
 
   const openInNew = useCallback(async (post: Post.Summary) => {
-    let url = `http://localhost:3002/posts/${post.id}/${post.slug}`;
+    let url = `${BLOG_BASE_URL}/posts/${post.id}/${post.slug}`;
 
     if (!post.published) {
       const codeVerifier = AuthService.getCodeVerifier();

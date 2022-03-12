@@ -17,6 +17,8 @@ import { Authentication } from "auth/auth";
 import { useAuth } from "core/hooks/useAuth";
 import Loading from "./components/Loading";
 
+const APP_BASE_URL = process.env.REACT_APP_BASE_URL
+
 export default function App() {
   const history = useHistory();
   const { pathname } = useLocation();
@@ -72,7 +74,7 @@ export default function App() {
         } = await AuthService.getFirstAccessToken({
           code,
           codeVerifier,
-          redirectUri: "http://localhost:3001/authorize",
+          redirectUri: `${APP_BASE_URL}/authorize`,
         });
 
         AuthService.setAccessToken(access_token);
