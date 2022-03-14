@@ -9,7 +9,7 @@ interface ValueDescriptorProps {
 
 export function ValueDescriptor(props: ValueDescriptorProps) {
   return (
-    <Wrapper color={props.color}>
+    <Wrapper {...props} color={props.color}>
       <span>{props.description}:</span>
       <div>
         {props.isCurrency && <span>{"R$"}</span>}

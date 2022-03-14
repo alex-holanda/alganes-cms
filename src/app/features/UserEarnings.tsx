@@ -1,31 +1,13 @@
-import { useState, useEffect } from "react";
-
 import Skeleton from "react-loading-skeleton";
 
-import useUser from "../../core/hooks/useUser";
+import { useAuth } from "core/hooks";
 
 import { ValueDescriptor } from "../components/ValueDescriptor";
 
 import styled from "styled-components";
-import { useAuth } from "core/hooks/useAuth";
 
 export function UserEarnings() {
-  const { user, fetchUser } = useUser();
-  const [error, setError] = useState<Error>();
-
-  const { user: authUser } = useAuth();
-
-  useEffect(() => {
-    if (authUser) {
-      fetchUser(authUser.id).catch((error) =>
-        setError(new Error(error.message))
-      );
-    }
-  }, [authUser, fetchUser]);
-
-  if (error) {
-    throw error;
-  }
+  const { user } = useAuth();
 
   if (!user) {
     return (
@@ -49,6 +31,7 @@ export function UserEarnings() {
       <ValueDescriptor
         color="primary"
         description="ganhos na semana"
+        data-testid={"weeklyEarnings"}
         value={user.metrics.weeklyEarnings}
         isCurrency
       />

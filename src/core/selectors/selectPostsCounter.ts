@@ -1,5 +1,5 @@
-import { RootState } from "../store";
+import { Store } from "../store";
 
-export default function selectPostsCounter(state: RootState) {
+export default function selectPostsCounter(state: Store.RootState) {
   return state.post.counter;
 }

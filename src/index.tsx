@@ -7,7 +7,7 @@ import GlobalStyles from "./core/globalStyles";
 import App from "./app";
 
 import { Provider } from "react-redux";
-import store from "./core/store";
+import { store } from "./core/store";
 
 import "./auth/httpConfig";
 

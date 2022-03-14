@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { Post, PostService } from "alex-holanda-sdk";
 import { info } from "../utils/info";
 
-export default function useSinglePost() {
+function useSinglePost() {
   const [post, setPost] = useState<Post.Detailed>();
   const [loading, setLoading] = useState(false);
 
@@ -29,3 +29,5 @@ export default function useSinglePost() {
     publishPost,
   };
 }
+
+export default useSinglePost;

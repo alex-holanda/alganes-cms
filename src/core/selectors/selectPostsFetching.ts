@@ -1,5 +1,5 @@
-import { RootState } from "../store";
+import { Store } from "../store";
 
-export default function selectPostsFetching(state: RootState) {
+export default function selectPostsFetching(state: Store.RootState) {
   return state.post.fetching;
 }

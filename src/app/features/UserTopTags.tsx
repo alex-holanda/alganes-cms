@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import { CircleChart } from "../components/CircleChart";
 
 import styled from "styled-components";
-import useTopTags from "../../core/hooks/useTopTags";
+import { useTopTags } from "../../core/hooks";
 
 export function UserTopTags() {
   const { topTags, fetchTopTags } = useTopTags();

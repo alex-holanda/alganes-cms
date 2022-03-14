@@ -1,5 +1,5 @@
-import { RootState } from "../store";
+import { Store } from "../store";
 
-export default function selectPaginatedPosts(state: RootState) {
+export default function selectPaginatedPosts(state: Store.RootState) {
   return state.post.paginated;
 }

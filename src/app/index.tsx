@@ -14,10 +14,10 @@ import { PostEditView } from "./views/PostEdit.view";
 
 import AuthService from "auth/Authorization.service";
 import { Authentication } from "auth/auth";
-import { useAuth } from "core/hooks/useAuth";
+import { useAuth } from "core/hooks";
 import Loading from "./components/Loading";
 
-const APP_BASE_URL = process.env.REACT_APP_BASE_URL
+const APP_BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export default function App() {
   const history = useHistory();

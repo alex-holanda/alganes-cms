@@ -1,6 +1,6 @@
 import DefaultLayout from "../layouts/Default/Default.layout";
 
-import { usePageTitle } from "../../core/hooks/usePageTitle";
+import { usePageTitle } from "../../core/hooks";
 import { PostForm } from "../features/PostForm";
 
 export function PostCreateView() {

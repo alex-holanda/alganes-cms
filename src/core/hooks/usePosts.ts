@@ -1,13 +1,14 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import * as PostActions from "../store/Post.store";
+import { Post } from "alex-holanda-sdk";
+
+import { PostActions } from "../store";
 
 import selectPaginatedPosts from "../selectors/selectPaginatedPosts";
 import selectPostsFetching from "../selectors/selectPostsFetching";
-import { Post } from "alex-holanda-sdk";
-import { useCallback } from "react";
 
-export default function usePosts() {
+function usePosts() {
   const dispatch = useDispatch();
 
   const paginatedPosts = useSelector(selectPaginatedPosts);
@@ -26,3 +27,5 @@ export default function usePosts() {
     fetchPosts,
   };
 }
+
+export default usePosts;

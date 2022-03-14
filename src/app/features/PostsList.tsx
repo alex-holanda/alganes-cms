@@ -3,7 +3,7 @@ import { useMemo, useEffect, useState, useCallback } from "react";
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
 
-import usePosts from "../../core/hooks/usePosts";
+import { usePosts } from "../../core/hooks";
 
 import { Column, useTable, usePagination } from "react-table";
 

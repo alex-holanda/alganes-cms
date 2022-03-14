@@ -10,7 +10,7 @@ import withBoundary from "../../core/hoc/withBoundary";
 
 import { confirm } from "../../core/utils/confirm";
 import { modal } from "../../core/utils/modal";
-import useSinglePost from "../../core/hooks/useSinglePost";
+import { useSinglePost } from "../../core/hooks";
 
 interface PostPreviewProps {
   postId: number;

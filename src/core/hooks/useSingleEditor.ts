@@ -1,7 +1,7 @@
 import { User, UserService } from "alex-holanda-sdk";
 import { useCallback, useState } from "react";
 
-export default function useSingleEditor() {
+function useSingleEditor() {
   const [editor, setEditor] = useState<User.EditorDetailed>();
 
   const fetchEditor = useCallback(async function (editorId: number) {
@@ -13,3 +13,5 @@ export default function useSingleEditor() {
     fetchEditor,
   };
 }
+
+export default useSingleEditor;

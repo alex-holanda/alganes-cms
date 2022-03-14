@@ -4,7 +4,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { confirm } from "core/utils/confirm";
 
-import { useAuth } from "core/hooks/useAuth";
+import { useAuth } from "core/hooks";
 
 import AuthService from "auth/Authorization.service";
 

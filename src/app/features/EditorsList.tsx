@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import { getEditorDescription } from "../../core/utils/getEditorDescription";
 
-import useEditors from "../../core/hooks/useEditors";
+import { useEditors } from "../../core/hooks";
 
 import { Profile } from "../components/Profile";
 

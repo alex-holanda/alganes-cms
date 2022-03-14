@@ -10,7 +10,7 @@ import { ValueDescriptor } from "../components/ValueDescriptor";
 
 import styled from "styled-components";
 import { transparentize } from "polished";
-import { useAuth } from "core/hooks/useAuth";
+import { useAuth } from "core/hooks";
 import { User } from "alex-holanda-sdk";
 
 interface EditorProfileProps {

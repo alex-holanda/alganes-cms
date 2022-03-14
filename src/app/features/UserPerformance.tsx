@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 
 import withBoundary from "../../core/hoc/withBoundary";
-import usePerformance from "../../core/hooks/usePerformance";
+import { usePerformance } from "../../core/hooks";
 
 import { Chart } from "../components/Chart";
 

@@ -1,4 +1,4 @@
-import { usePageTitle } from "../../core/hooks/usePageTitle";
+import { usePageTitle } from "../../core/hooks";
 
 import DefaultLayout from "../layouts/Default";
 

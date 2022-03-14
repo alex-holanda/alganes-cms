@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 import { Metric, MetricService } from "alex-holanda-sdk";
 
-export default function useTopTags() {
+function useTopTags() {
   const [topTags, setTopTags] = useState<Metric.EditorTagRatio>([]);
 
   const fetchTopTags = useCallback(async () => {
@@ -14,3 +14,5 @@ export default function useTopTags() {
     fetchTopTags,
   };
 }
+
+export default useTopTags;

@@ -6,7 +6,7 @@ import { MetricService } from "alex-holanda-sdk";
 
 import transformEditorMonthlyEarningsIntoChartJS from "../utils/transformEditorMonthlyEarningsIntoChartJS";
 
-export default function usePerformance() {
+function usePerformance() {
   const [performance, setPerformance] = useState<Chart.ChartData>();
 
   const fetchPerformance = useCallback(async () => {
@@ -20,3 +20,5 @@ export default function usePerformance() {
     fetchPerformance,
   };
 }
+
+export default usePerformance;

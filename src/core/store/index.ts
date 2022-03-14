@@ -1,17 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./Auth.slice";
-import { editorReducer } from "./Editor.store";
-import { postReducer } from "./Post.store";
+export * from "./@types";
 
-const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    post: postReducer,
-    editor: editorReducer,
-  },
-});
+export { default as store, createAppStore } from "./store";
 
-export default store;
+export * as AuthActions from "./Auth.slice";
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export * as EditorActions from "./Editor.store";
+
+export * as PostActions from "./Post.store";
