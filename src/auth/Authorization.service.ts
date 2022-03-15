@@ -4,7 +4,7 @@ import qs from "qs";
 
 import pkceChallenge from "pkce-challenge";
 
-import { Authentication } from "./auth";
+import { Authentication } from "./Auth";
 
 const AUTH_SERVER_BASE_URL = process.env.REACT_APP_AUTH_SERVER_BASE_URL;
 const APP_BASE_URL = process.env.REACT_APP_BASE_URL;

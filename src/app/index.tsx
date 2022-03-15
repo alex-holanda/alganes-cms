@@ -13,7 +13,7 @@ import { PostCreateView } from "./views/PostCreate.view";
 import { PostEditView } from "./views/PostEdit.view";
 
 import AuthService from "auth/Authorization.service";
-import { Authentication } from "auth/auth";
+import { Authentication } from "auth/Auth";
 import { useAuth } from "core/hooks";
 import Loading from "./components/Loading";
 
@@ -25,12 +25,10 @@ export default function App() {
 
   const { fetchUser, user } = useAuth();
 
-  const isAuthorizationRoute = useMemo(() => pathname === "/authorize", [
-    pathname,
-  ]);
-
   useEffect(() => {
     window.onunhandledrejection = function (error: PromiseRejectionEvent) {
+      console.log(error);
+
       info({
         title: error.reason.response?.data.title || "Error",
         description: error.reason.response?.data.detail || error.reason.message,
@@ -101,6 +99,10 @@ export default function App() {
 
     identify();
   }, [history, fetchUser]);
+
+  const isAuthorizationRoute = useMemo(() => pathname === "/authorize", [
+    pathname,
+  ]);
 
   if (isAuthorizationRoute || !user) {
     return <Loading show />;
